@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		GlyXHGiESijgtQS+RTF3GmBdkNg=
+		HCdaEDK5jda2Ni6gknrKGRYlUg0=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,15 +54,15 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		bwmBYujfNDTf6ObnUq+N8FQ6Fjc=
+		MHkQj/E64fq770LdLmUWrCZvCCs=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
-		24Xrj/aBxlDvMliTkcIGbPTymXM=
+		b+sXyscvuCQDcGN2RheJIFwbZAc=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<data>
-		MQJSKNjjvmulhiC0aQTHv9VxU0I=
+		hpi+usRg3HVDGJpfxwFd9vSXUZo=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
 		<data>
@@ -116,6 +116,10 @@
 		<data>
 		GETTi8XH2VhSJ6lRTB84PkbVjsw=
 		</data>
+		<key>Frameworks/App.framework/flutter_assets/assets/images/person.png</key>
+		<data>
+		wfTazsIPmQ7q7g3FmszY1p5Uk5c=
+		</data>
 		<key>Frameworks/App.framework/flutter_assets/assets/images/task_trigger.png</key>
 		<data>
 		WM88h8khXI+zg7HrG/kjzLIvA18=
@@ -130,7 +134,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		vwJnvMZA4m04NccWXcuPX+jUqGw=
+		kbgSZOtM+XavIdehvdogdtdGHbQ=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
 		<data>
@@ -645,7 +649,7 @@
 		</data>
 		<key>__preview.dylib</key>
 		<data>
-		B7KGw+oeUyL+9bSjwX/BqJercxI=
+		u3KR6UKk4AOSm34ypEmPGEU2Ikc=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -724,7 +728,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			oFYZKFMxKL2am6pzQI9rXTy1Y/EsHf2mTw9mN1N3Cv0=
+			6dmAJuT6eWAi43aiH6OrJgl7kkyU2ucIqmi2TXNLCD4=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -738,21 +742,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			oS4OEZpQESCmRTOnNFe6IMdW5Muei/xPPVtWxS79b5U=
+			abfMNX6jbtWdQfuycBsp1A5VkPT30US4Qf0k2wpWL9k=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			KuWh8bhiupdE4uY3wj+7tu8f5L44EWzQIg1dnvOdHVE=
+			Uw8YqZ7Hx2W6hw8y2eFizf2Ndt0WCkBPbxJtgiMmKNE=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			N9jjcmhYA5lEDtS+ZL0cqfggqTwGS3iMjSPCO3fXDQ4=
+			YJKwPh3GKBO4XJ9HlU/GzuYRx+H/L4ufkuZ8crRAgWc=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/FontManifest.json</key>
@@ -846,6 +850,13 @@
 			nQZwkD6rWxbZ9MTUQy+csEFUhPhJShe1ZF63E8S6+yo=
 			</data>
 		</dict>
+		<key>Frameworks/App.framework/flutter_assets/assets/images/person.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			RFzqSdNT7jIVUOYWRN8HEh1cyo7vj863YVrZbkZsfpg=
+			</data>
+		</dict>
 		<key>Frameworks/App.framework/flutter_assets/assets/images/task_trigger.png</key>
 		<dict>
 			<key>hash2</key>
@@ -871,7 +882,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			lOoSFg2PGT4rh8BXFlwHUucjVbcV3yYcCOmADIR48Gc=
+			76SlNwdZwugZUVtLBfN3FS83nhK7F0o66XhFDxhUMOk=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf</key>
@@ -1603,7 +1614,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			WSd8R5Ri72kdGRKXbX1L+TQ7q/cBF5HDNZ8kNvZrB50=
+			aLfSm5J8KbNRw0X6lPMB1YOEQALYWVcqtD9VtX2mfWw=
 			</data>
 		</dict>
 	</dict>

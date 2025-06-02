@@ -4,7 +4,6 @@ import 'package:iwalker/core/themes/text_extensions.dart';
 
 import '../../../../core/widgets/outlined_text_field_widget.dart';
 import '../../../../core/widgets/wide_custom_button.dart';
-import 'sign_in.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({super.key});
@@ -42,7 +41,10 @@ class _ChangePasswordState extends State<ChangePassword> {
             centerTitle: true,
             automaticallyImplyLeading: false,
             title: 'Change Password'.text20Black(),
-            leading: Icon(Icons.arrow_back_ios),
+            leading: IconButton(
+              onPressed: () => Get.back(),
+              icon: Icon(Icons.arrow_back_ios),
+            ),
             actions: [SizedBox()],
           ),
 

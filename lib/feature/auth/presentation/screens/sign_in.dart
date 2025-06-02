@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iwalker/core/themes/text_extensions.dart';
+import 'package:iwalker/feature/auth/presentation/screens/change_password.dart';
 import 'package:iwalker/feature/auth/presentation/screens/sign_up.dart';
-
+import '../../../../app.dart';
 import '../../../../core/widgets/outlined_text_field_widget.dart';
 import '../../../../core/widgets/wide_custom_button.dart';
 
@@ -88,36 +89,43 @@ class _SignInState extends State<SignIn> {
                       textInputType: TextInputType.text,
                       //textFieldHeaderName: 'password',
                     ),
-                    const SizedBox(height: 30),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: ['Forgot Password'.text16LightGreen()],
+                    const SizedBox(height: 10),
+                    TextButton(
+                      onPressed: () {
+                        Get.to(const ChangePassword());
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: ['Forgot Password?'.text16LightGreen()],
+                      ),
                     ),
-                    const SizedBox(height: 20.0),
+                    const SizedBox(height: 10),
 
+                    // const SizedBox(height: 20.0),
                     WideCustomButton(
                       text: 'LOG IN',
                       onPressed: () {
-                        String email = emailContoller.text;
-                        String password = passwordController.text;
-                        if (email.isEmpty) {
-                          showAboutDialog(
-                            context: context,
-                            children: [Text('email is required'.tr)],
-                          );
-                        } else if (password.isEmpty) {
-                          showAboutDialog(
-                            context: context,
-                            children: [Text('password_is_required'.tr)],
-                          );
-                        } else if (password.length < 5) {
-                          showAboutDialog(
-                            context: context,
-                            children: [Text('minimum password length is 8')],
-                          );
-                        } else {
-                          // authController.SignIn(email, password);
-                        }
+                        Get.to(AppMain());
+                        // String email = emailContoller.text;
+                        // String password = passwordController.text;
+                        // if (email.isEmpty) {
+                        //   showAboutDialog(
+                        //     context: context,
+                        //     children: [Text('email is required'.tr)],
+                        //   );
+                        // } else if (password.isEmpty) {
+                        //   showAboutDialog(
+                        //     context: context,
+                        //     children: [Text('password_is_required'.tr)],
+                        //   );
+                        // } else if (password.length < 5) {
+                        //   showAboutDialog(
+                        //     context: context,
+                        //     children: [Text('minimum password length is 8')],
+                        //   );
+                        // } else {
+                        //   // authController.SignIn(email, password);
+                        // }
                       },
                     ),
                     const SizedBox(height: 10),
@@ -147,6 +155,7 @@ class _SignInState extends State<SignIn> {
                   TextButton(
                     onPressed: () {
                       Get.to(SignUp());
+                      // Get.to(() => SignUp());
                     },
                     child: ' SignUp!'.text16LightGreen(),
                   ),

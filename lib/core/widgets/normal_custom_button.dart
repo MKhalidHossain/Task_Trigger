@@ -15,11 +15,11 @@ class NormalCustomButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
-    this.height = 40,
-    this.weight = 140,
+    this.height = 30,
+    this.weight = 80,
     this.fontSize = 14,
     this.textColor = Colors.white,
-    this.fillColor = Colors.red,
+    this.fillColor = const Color(0xff285358),
     this.showIcon = false,
     this.sufixIcon,
   });
@@ -32,7 +32,7 @@ class NormalCustomButton extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: fillColor, // Make it red like in your design
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         ),
         onPressed: onPressed,
@@ -40,10 +40,9 @@ class NormalCustomButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(text, style: TextStyle(color: textColor, fontSize: fontSize)),
-            if (showIcon && sufixIcon != null) ...[
-              const SizedBox(width: 5),
-              Icon(sufixIcon, color: Colors.white),
-            ],
+            const SizedBox(width: 8),
+            const SizedBox(width: 5),
+            Icon(sufixIcon, color: Colors.white),
           ],
         ),
       ),

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:iwalker/feature/auth/presentation/screens/sign_up.dart';
-
-import 'feature/auth/presentation/screens/change_password.dart';
-
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:iwalker/feature/auth/presentation/screens/sign_in.dart';
 void main() {
-  runApp(const MyApp());
+  runApp(GetMaterialApp(debugShowCheckedModeBanner: false, home: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+ 
 
   // This widget is the root of your application.
   @override
@@ -19,7 +19,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const ChangePassword(),
+      home: SignIn(),
+
+      //SignIn(),
     );
   }
 }
