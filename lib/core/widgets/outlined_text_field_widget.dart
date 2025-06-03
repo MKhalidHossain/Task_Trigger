@@ -8,15 +8,21 @@ class OutlinedTextFieldWidget extends StatefulWidget {
   final bool isLable;
   final String? lebel;
   final TextInputType textInputType;
+  final bool isObsecure;
 
-   OutlinedTextFieldWidget({super.key, 
-  required this.controller, 
-   this.isLable= true, 
-  this.lebel, 
-  required this.textInputType});
+  OutlinedTextFieldWidget({
+    super.key,
+    required this.controller,
+
+    this.isLable = true,
+    this.lebel,
+    required this.textInputType,
+    this.isObsecure = false,
+  });
 
   @override
-  State<OutlinedTextFieldWidget> createState() => _OutlinedTextFieldWidgetState();
+  State<OutlinedTextFieldWidget> createState() =>
+      _OutlinedTextFieldWidgetState();
 }
 
 class _OutlinedTextFieldWidgetState extends State<OutlinedTextFieldWidget> {
@@ -45,6 +51,7 @@ class _OutlinedTextFieldWidgetState extends State<OutlinedTextFieldWidget> {
             controller: widget.controller,
             keyboardType: widget.textInputType,
             style: TextStyle(color: textColor),
+            obscureText: !_obscureText,
             decoration: InputDecoration(
               //labelText: isLable && lebel != null ? lebel : null,
               labelText: widget.lebel,
@@ -54,17 +61,21 @@ class _OutlinedTextFieldWidgetState extends State<OutlinedTextFieldWidget> {
                 color: textColor,
               ),
               border: OutlineInputBorder(),
-              suffixIcon: IconButton(
-      icon: Icon(
-        _obscureText ? Icons.visibility : Icons.visibility_off,
-      ),
-      onPressed: () {
-        
-        setState(() {
-          _obscureText = !_obscureText;
-        });
-      }
-                ) ,             enabledBorder: OutlineInputBorder(
+
+              suffixIcon: widget.isObsecure 
+              ? IconButton(
+                icon: Icon(
+                  _obscureText ? Icons.visibility : Icons.visibility_off,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _obscureText = !_obscureText;
+                  });
+                },
+              )
+               :null,
+
+              enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: AppColors.context(context).borderColor,
                   width: 1.5,

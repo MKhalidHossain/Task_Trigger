@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iwalker/core/themes/text_extensions.dart';
 import 'package:iwalker/feature/task/presentation/screens/task_details_screen.dart';
-
 import '../../../../core/widgets/default_circular_percent_widget.dart';
 import '../../../../core/widgets/linear_percent_bar_widget.dart';
-import '../../../../core/widgets/normal_custom_button.dart';
 
 class TaskDetailsWidget extends StatelessWidget {
   const TaskDetailsWidget({super.key});

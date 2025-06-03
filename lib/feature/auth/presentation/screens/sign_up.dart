@@ -93,6 +93,7 @@ class _SignUpState extends State<SignUp> {
                     const SizedBox(height: 12),
                     OutlinedTextFieldWidget(
                       //name: 'Password',
+                      isObsecure: true,
                       lebel: 'Password',
                       controller: passwordController,
                       textInputType: TextInputType.text,
@@ -101,6 +102,7 @@ class _SignUpState extends State<SignUp> {
                     const SizedBox(height: 12),
                     OutlinedTextFieldWidget(
                       //name: 'Password',
+                      isObsecure: true,
                       lebel: 'Confirm Password',
                       controller: confirmPasswordController,
                       textInputType: TextInputType.text,

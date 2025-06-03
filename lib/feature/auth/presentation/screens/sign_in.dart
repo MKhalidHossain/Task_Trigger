@@ -77,12 +77,12 @@ class _SignInState extends State<SignIn> {
                       //name: 'Username or Email',
                       lebel: 'Eamil',
                       controller: emailContoller,
-
                       textInputType: TextInputType.text,
                       //textFieldHeaderName: 'Username or Email',
                     ),
                     const SizedBox(height: 24),
                     OutlinedTextFieldWidget(
+                      isObsecure: true,
                       //name: 'Password',
                       lebel: 'Password',
                       controller: passwordController,

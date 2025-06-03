@@ -49,6 +49,7 @@ class CreateNewTask extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    
                     OutlinedTextFieldforCreateWidget(
                       width: size.width / 2 - 24,
                       //name: 'Password',
