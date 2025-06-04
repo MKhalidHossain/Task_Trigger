@@ -81,6 +81,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     ),
                     const SizedBox(height: 12),
                     OutlinedTextFieldWidget(
+                      isObsecure: true,
                       //name: 'Password',
                       lebel: 'New Password',
                       controller: newPasswordController,
@@ -89,6 +90,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     ),
                     const SizedBox(height: 12),
                     OutlinedTextFieldWidget(
+                      isObsecure: true,
                       //name: 'Password',
                       lebel: 'Confirm New Password',
                       controller: confirmNewPasswordController,

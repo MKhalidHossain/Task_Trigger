@@ -19,6 +19,15 @@ class CreateNewTask extends StatelessWidget {
       color: Color(0xff438B92),
       child: SafeArea(
         child: Scaffold(
+          //.......................................... Need to Remove this > Appbar < When App APi integrated.......................................
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
           body: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -49,7 +58,6 @@ class CreateNewTask extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    
                     OutlinedTextFieldforCreateWidget(
                       width: size.width / 2 - 24,
                       //name: 'Password',

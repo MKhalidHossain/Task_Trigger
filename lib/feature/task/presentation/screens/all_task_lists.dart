@@ -16,7 +16,11 @@ class _AllTaskListsState extends State<AllTaskLists> {
       color: Color(0xff438B92),
       child: SafeArea(
         child: Scaffold(
-          appBar: AppBar(centerTitle: true, title: 'All Tasks'.text20Black()),
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            centerTitle: true,
+            title: 'All Tasks'.text20Black(),
+          ),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(16.0),

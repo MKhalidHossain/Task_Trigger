@@ -10,7 +10,13 @@ class OutlinedTextFieldforCreateWidget extends StatelessWidget {
   final Icon icon;
   final double width;
 
-  const OutlinedTextFieldforCreateWidget({super.key, required this.controller,  this.isLable = true, this.lebel, required this.textInputType, required this.icon,  this.width=double.infinity});
+  const OutlinedTextFieldforCreateWidget({super.key, 
+  required this.controller, 
+   this.isLable = true, 
+   this.lebel,
+    required this.textInputType, 
+    required this.icon,  
+    this.width=double.infinity});
 
  
   //final String textFieldHeaderName;

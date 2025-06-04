@@ -272,6 +272,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "motion_tab_bar",
+      "rootUri": "file:///Users/saa/.pub-cache/hosted/pub.dev/motion_tab_bar-2.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "path",
       "rootUri": "file:///Users/saa/.pub-cache/hosted/pub.dev/path-1.9.1",
       "packageUri": "lib/",
@@ -518,7 +524,7 @@
       "languageVersion": "3.7"
     }
   ],
-  "generated": "2025-06-03T10:54:32.140517Z",
+  "generated": "2025-06-04T07:02:17.578659Z",
   "generator": "pub",
   "generatorVersion": "3.7.2",
   "flutterRoot": "file:///Users/saa/src/flutter",

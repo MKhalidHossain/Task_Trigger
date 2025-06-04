@@ -7,7 +7,7 @@ class OutlinedTextFieldforProfileWidget extends StatefulWidget {
   final bool isLable;
   final String? lebel;
   final TextInputType textInputType;
-  final bool isObsecure;
+  final bool isIconshow;
 
   const OutlinedTextFieldforProfileWidget({
     super.key,
@@ -16,7 +16,7 @@ class OutlinedTextFieldforProfileWidget extends StatefulWidget {
     this.isLable = true,
     this.lebel,
     required this.textInputType,
-    this.isObsecure = false,
+    this.isIconshow = false,
   });
 
   @override
@@ -51,7 +51,7 @@ class _OutlinedTextFieldforProfileWidgetState
             controller: widget.controller,
             keyboardType: widget.textInputType,
             style: TextStyle(color: textColor),
-            obscureText: !_obscureText,
+            // obscureText: !_obscureText,
             decoration: InputDecoration(
               //labelText: isLable && lebel != null ? lebel : null,
               labelText: widget.lebel,
@@ -62,12 +62,10 @@ class _OutlinedTextFieldforProfileWidgetState
               ),
               border: OutlineInputBorder(),
               suffixIcon:
-                  widget.isObsecure
+                  widget.isIconshow
                       ? IconButton(
                         icon: Icon(
-                          _obscureText
-                              ? Icons.visibility
-                              : Icons.visibility_off,
+                          _obscureText ? Icons.edit : Icons.edit_off_sharp,
                         ),
                         onPressed: () {
                           setState(() {

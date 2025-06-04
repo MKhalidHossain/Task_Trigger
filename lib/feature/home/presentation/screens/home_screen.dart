@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iwalker/core/themes/text_extensions.dart';
+import 'package:iwalker/feature/others/presentation/screens/notification_screen.dart';
+import 'package:iwalker/feature/profile/presentation/screens/user_profile_screen.dart';
 import '../../../../core/widgets/default_circular_percent_widget.dart';
 import '../widgets/task_widget_home.dart';
 
@@ -30,18 +33,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Color(0xffC5DBDD),
                     child: Row(
                       children: [
-                        CircleAvatar(
-                          radius: 30,
-                          backgroundImage: AssetImage(
-                            'assets/images/person.png',
+                        GestureDetector(
+                          child: CircleAvatar(
+                            radius: 30,
+                            backgroundImage: AssetImage(
+                              'assets/images/person.png',
+                            ),
                           ),
+                          onTap: () {
+                            Get.to(UserProfileScreen());
+                          },
                         ),
 
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0,
-                            ),
+                            padding: const EdgeInsets.only(left: 16.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -53,7 +59,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                     'Today, 6 December'.text12Black(),
                                   ],
                                 ),
-                                Icon(Icons.notifications_active_outlined),
+                                IconButton(
+                                  onPressed: () {
+                                    Get.to(NotificationScreen());
+                                  },
+                                  icon: Icon(
+                                    Icons.notifications_active_outlined,
+                                  ),
+                                ),
                               ],
                             ),
                           ),

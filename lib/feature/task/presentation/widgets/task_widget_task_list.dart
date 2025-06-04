@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iwalker/core/themes/text_extensions.dart';
+import 'package:iwalker/feature/task/presentation/screens/create_new_task.dart';
 import 'package:iwalker/feature/task/presentation/screens/task_details_screen.dart';
 
 import '../../../../core/widgets/default_circular_percent_widget.dart';
@@ -61,7 +62,9 @@ class TaskWidgetTaskList extends StatelessWidget {
                   text: 'Edit',
                   showIcon: true,
                   sufixIcon: Icons.edit_outlined,
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(CreateNewTask());
+                  },
                 ),
               ],
             ),
