@@ -168,7 +168,7 @@ class _SignUpState extends State<SignUp> {
                     onPressed: () {
                       Get.to(SignIn());
                     },
-                    child: 'Sign in'.text16LightGreen(),
+                    child: 'Sign in'.text16Profile(),
                   ),
                 ],
               ),

@@ -3,9 +3,10 @@ import 'package:get/get.dart';
 import 'package:iwalker/core/themes/text_extensions.dart';
 import 'package:iwalker/feature/auth/presentation/screens/change_password.dart';
 import 'package:iwalker/feature/auth/presentation/screens/sign_up.dart';
-import '../../../../app.dart';
+
 import '../../../../core/widgets/outlined_text_field_widget.dart';
 import '../../../../core/widgets/wide_custom_button.dart';
+import '../../../../navigation/bottom_nevbar.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -65,7 +66,7 @@ class _SignInState extends State<SignIn> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            'SignIn'.text24DarkGreen(),
+                            'Sign In'.text24DarkGreen(),
                             const SizedBox(height: 8.0),
                             'Please sign in to continue.'.text16Grey(),
                           ],
@@ -96,7 +97,7 @@ class _SignInState extends State<SignIn> {
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
-                        children: ['Forgot Password?'.text16LightGreen()],
+                        children: ['Forgot Password?'.text16Profile()],
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -105,7 +106,7 @@ class _SignInState extends State<SignIn> {
                     WideCustomButton(
                       text: 'LOG IN',
                       onPressed: () {
-                        Get.to(AppMain());
+                        Get.to(BottomNevbar());
                         // String email = emailContoller.text;
                         // String password = passwordController.text;
                         // if (email.isEmpty) {
@@ -157,7 +158,7 @@ class _SignInState extends State<SignIn> {
                       Get.to(SignUp());
                       // Get.to(() => SignUp());
                     },
-                    child: ' SignUp!'.text16LightGreen(),
+                    child: ' SignUp!'.text16Profile(),
                   ),
                 ],
               ),
