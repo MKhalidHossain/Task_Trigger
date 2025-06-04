@@ -30,7 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.all(16),
                     height: 100,
                     width: double.infinity,
-                    color: Color(0xffC5DBDD),
+
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: Color(0xffC5DBDD),
+                    ),
                     child: Row(
                       children: [
                         GestureDetector(
@@ -79,7 +83,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.all(16),
                     height: 150,
                     width: double.infinity,
-                    color: Color(0xffC366F75),
+
+                    decoration: BoxDecoration(
+                      color: Color(0xffC366F75),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

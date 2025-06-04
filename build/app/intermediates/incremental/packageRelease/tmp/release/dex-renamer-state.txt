@@ -1,0 +1,4 @@
+#Wed Jun 04 16:48:01 BDT 2025
+base.0=/Users/saa/dev/flutter/iwalker2390/iwalker/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
