@@ -129,6 +129,7 @@ extension TextStylingExtension on String {
 
   // TextSize 14
   Text text14Black() => Text(
+    maxLines: 15,
     this,
     style: const TextStyle(
       fontSize: 14,
@@ -138,8 +139,20 @@ extension TextStylingExtension on String {
     ),
   );
 
+  Text text14Grey() => Text(
+    maxLines: 15,
+    this,
+    style: const TextStyle(
+      fontSize: 14,
+      fontFamily: _fontFamily,
+      fontWeight: FontWeight.w400,
+      color: Color(0xFF666666),
+    ),
+  );
+
   // TextSize 12
   Text text12Black() => Text(
+    maxLines: 15,
     this,
     style: const TextStyle(
       fontSize: 12,

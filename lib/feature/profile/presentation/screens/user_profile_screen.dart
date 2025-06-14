@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iwalker/core/themes/text_extensions.dart';
-import 'package:iwalker/feature/auth/presentation/screens/sign_in.dart';
+import 'package:iwalker/feature/auth/presentation/screens/sign_in_screen.dart';
 import 'package:iwalker/feature/others/presentation/screens/about_app_screen.dart';
 import 'package:iwalker/feature/others/presentation/screens/tearm_and_conditon_screen.dart';
 import 'package:iwalker/feature/profile/presentation/screens/edit_profile_screen.dart';
 
-import '../../../auth/presentation/screens/change_password.dart';
+import '../../../auth/presentation/screens/change_password_screen.dart';
 import '../../../others/presentation/screens/notification_screen.dart';
 import '../../../others/presentation/screens/privacy_policy_screen.dart';
 
@@ -128,7 +128,7 @@ class UserProfileScreen extends StatelessWidget {
                             Icons.lock_outline,
                             "Change Password",
                             onTap: () {
-                              Get.to(ChangePassword());
+                              Get.to(ChangePasswordScreen());
                             },
                           ),
                           _divider(),
@@ -145,7 +145,7 @@ class UserProfileScreen extends StatelessWidget {
                             "Log Out",
                             color: Colors.red,
                             onTap: () {
-                              Get.to(SignIn());
+                              Get.to(SignInScreen());
                             },
                           ),
                           _divider(),

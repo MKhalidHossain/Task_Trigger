@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:iwalker/feature/auth/presentation/screens/sign_in.dart';
+import 'package:iwalker/feature/auth/presentation/screens/sign_in_screen.dart';
 
 void main() {
   runApp(GetMaterialApp(debugShowCheckedModeBanner: false, home: MyApp()));
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           surface: Color(0xffe3eeef),
         ),
       ),
-      home: SignIn(),
+      home: SignInScreen(),
 
       //SignIn(),.
     );
