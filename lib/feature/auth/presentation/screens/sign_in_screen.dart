@@ -92,7 +92,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     const SizedBox(height: 10),
                     TextButton(
                       onPressed: () {
-                        Get.to(const ForgotPasswordScreen());
+                        Get.to( ForgotPasswordScreen());
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,

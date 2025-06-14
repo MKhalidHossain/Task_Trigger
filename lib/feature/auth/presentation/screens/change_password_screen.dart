@@ -105,7 +105,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     const SizedBox(height: 20.0),
 
                     WideCustomButton(
-                      text: 'Sign Up',
+                      text: 'Save',
                       onPressed: () {
                         String currentPassword = currentPasswordContoller.text;
                         String newPassword = newPasswordController.text;

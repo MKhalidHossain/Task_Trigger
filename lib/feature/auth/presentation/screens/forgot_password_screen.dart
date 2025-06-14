@@ -3,10 +3,33 @@ import 'package:get/get.dart';
 import 'package:iwalker/core/themes/text_extensions.dart';
 import 'package:iwalker/core/widgets/wide_custom_button.dart';
 
-import 'code_verify_screen.dart';
+import '../../../../core/widgets/outlined_text_field_widget.dart';
+import 'code_verification_screen.dart';
 
-class ForgotPasswordScreen extends StatelessWidget {
-  const ForgotPasswordScreen({super.key});
+class ForgotPasswordScreen extends StatefulWidget {
+   ForgotPasswordScreen({super.key});
+
+  @override
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+}
+
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  late TextEditingController emailContoller;
+
+ @override
+  void initState() {
+  emailContoller = TextEditingController();
+    super.initState();
+  }
+
+
+
+
+  @override
+  void dispose() {
+    emailContoller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,50 +56,18 @@ class ForgotPasswordScreen extends StatelessWidget {
                     .text14Grey(),
                 const SizedBox(height: 32),
                 //email container for forgot password email show with secure text
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Color(0xFF6DC9E7), width: 1),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Row(
-                      children: [
-                        //email circle center icon
-                        Container(
-                          height: 60,
-                          width: 60,
-                          decoration: BoxDecoration(
-                            color: Color(0xFF438B92),
-                            shape: BoxShape.circle,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.email_outlined,
-                              color: Colors.white,
-                              size: 32,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            'Via Email:'.text16Grey(),
-                            'gdg***fsf@gmail.com'.text20Black(),
-                          ],
-                        ),
-                      ],
+                OutlinedTextFieldWidget(
+                      //name: 'Username or Email',
+                      lebel: 'Eamil',
+                      controller: emailContoller,
+                      textInputType: TextInputType.text,
+                      //textFieldHeaderName: 'Username or Email',
                     ),
-                  ),
-                ),
                 const SizedBox(height: 24),
                 WideCustomButton(
                   text: 'Continue',
                   onPressed: () {
-                    Get.to(CodeVerifyScreen());
+                    Get.to(CodeVerificationScreen(email: 'dfgsdfrg@gml.com',));
                   },
                 ),
               ],

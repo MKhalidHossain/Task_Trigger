@@ -45,6 +45,7 @@ dependencies:
   video_player: ^2.9.5
   get_storage: ^2.1.1
   motion_tab_bar: ^2.0.4
+  pin_code_fields: ^8.0.0
 
 dev_dependencies:
   flutter_test:
