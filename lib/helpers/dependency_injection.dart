@@ -1,7 +1,6 @@
-
 import 'package:get/get.dart';
+import 'package:iwalker/core/constants/urls.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../feature/auth/controllers/auth_controller.dart';
 import '../feature/auth/repositories/auth_repository.dart';
 import '../feature/auth/repositories/auth_repository_interface.dart';
@@ -13,7 +12,7 @@ Future<void> initDI() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   ApiClient apiClient = ApiClient(
-    appBaseUrl: 'https://johnnybrutes.onrender.com/api/v1/',
+    appBaseUrl: Urls.baseUrl,
     sharedPreferences: prefs,
   );
 

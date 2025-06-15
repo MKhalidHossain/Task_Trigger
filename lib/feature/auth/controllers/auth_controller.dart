@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:iwalker/feature/auth/presentation/screens/code_verification_screen.dart';
+import 'package:iwalker/feature/auth/presentation/screens/create_new_password.dart';
 import 'package:iwalker/feature/auth/presentation/screens/sign_in_screen.dart';
 import 'package:iwalker/feature/auth/presentation/screens/sign_up_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../app.dart';
 import '../../../helpers/custom_snackbar.dart';
 import '../../../helpers/remote/data/api_checker.dart';
 import '../../../helpers/remote/data/api_client.dart';
+import '../../../navigation/bottom_nevbar.dart';
 import '../../../utils/app_constants.dart';
 import '../domain/model/login_response_model.dart';
 import '../sevices/auth_service_interface.dart';
@@ -115,53 +117,56 @@ class AuthController extends GetxController implements GetxService {
     update();
   }
 
-  // Future<void> login(String email, String password) async {
-  //   _isLoading = true;
-  //   update();
+  Future<void> login(String email, String password) async {
+    _isLoading = true;
+    update();
 
-  //   // Response? response = Response();
+    // Response? response = Response();
 
-  //   Response? response = await authServiceInterface.login(email, password);
-  //   if (response!.statusCode == 200) {
-  //     Map map = response.body;
-  //     String token = '';
-  //     String refreshToken = '';
+    Response? response = await authServiceInterface.login(email, password);
 
-  //     print(token.toString());
+    if (response == null) {
+      print("No response found");
+    }
+    if (response!.statusCode == 200) {
+      
+      Map map = response.body;
+      String token = '';
+      String refreshToken = '';
 
-  //     logInResponseModel = LogInResponseModel.fromJson(response.body);
+      print(token.toString());
 
-  //     refreshToken = logInResponseModel.data!.user!.refreshToken!;
+      logInResponseModel = LogInResponseModel.fromJson(response.body);
+      refreshToken = logInResponseModel.refreshToken ?? '';
+      token = logInResponseModel.accessToken ?? '';
+      print(
+        'accessToken $token NOWW Jonhnney  Bruites',
+      );
+      print('refreshToken $refreshToken NOWW Jonhnney  Bruites');
+      print(
+        'User Token $token  ================================== from comtroller ',
+      );
+      setUserToken(token, refreshToken);
 
-  //     token = logInResponseModel.data!.accessToken!;
+      Get.offAll(BottomNevbar());
 
-  //     print(
-  //       'accessToken ${logInResponseModel.data!.accessToken} NOWW Jonhnney  Bruites',
-  //     );
-  //     print('refreshToken $refreshToken NOWW Jonhnney  Bruites');
-  //     print(
-  //       'User Token $token  ================================== from comtroller ',
-  //     );
-  //     setUserToken(token, refreshToken);
+      showCustomSnackBar('Welcome you have successfully Logged In');
 
-  //     Get.offAll(MainScreen());
+      _isLoading = false;
+    } 
+    else if (response.statusCode == 202) {
+      if (response.body['data']['is_phone_verified'] == 0) {}
+    } else if (response.statusCode == 400) {
+      Get.offAll(SignUpScreen());
+      showCustomSnackBar('Sorry you have no account, please create a account');
+    } else {
+      _isLoading = false;
+      ApiChecker.checkApi(response);
+    }
 
-  //     showCustomSnackBar('Welcome you have successfully Logged In');
-
-  //     _isLoading = false;
-  //   } else if (response.statusCode == 202) {
-  //     if (response.body['data']['is_phone_verified'] == 0) {}
-  //   } else if (response.statusCode == 400) {
-  //     Get.offAll(SignUpScreen());
-  //     showCustomSnackBar('Sorry you have no account, please create a account');
-  //   } else {
-  //     _isLoading = false;
-  //     ApiChecker.checkApi(response);
-  //   }
-
-  //   _isLoading = false;
-  //   update();
-  // }
+    _isLoading = false;
+    update();
+  }
 
   bool isLoggedIn() {
     return authServiceInterface.isLoggedIn();
@@ -195,184 +200,184 @@ class AuthController extends GetxController implements GetxService {
     update();
   }
 
-  // Future<void> permanentDelete() async {
-  //   logging = true;
-  //   update();
+  Future<void> permanentDelete() async {
+    logging = true;
+    update();
 
-  //   update();
-  // }
+    update();
+  }
 
-  // Future<Response> sendOtp({
-  //   required String countryCode,
-  //   required String phone,
-  // }) async {
-  //   _isLoading = true;
-  //   update();
+  Future<Response> sendOtp({
+    required String countryCode,
+    required String phone,
+  }) async {
+    _isLoading = true;
+    update();
 
-  //   Response? response = Response();
+    Response? response = Response();
 
-  //   update();
-  //   return response;
-  // }
+    update();
+    return response;
+  }
 
-  // Future<void> otpVerification(String otp, String email) async {
-  //   _isLoading = true;
-  //   update();
-  //   Response? response = await authServiceInterface.verifyCode(otp, email);
-  //   if (response!.body['status'] == true) {
-  //     showCustomSnackBar('Otp verification has been successful');
-  //     Get.to(ResetPassword());
-  //   } else {
-  //     showCustomSnackBar('There is a problem in sending OTP');
-  //     // Get.find<AuthController>().logOut();
-  //   }
+  Future<void> otpVerification(String otp, String email) async {
+    _isLoading = true;
+    update();
+    Response? response = await authServiceInterface.verifyCode(otp, email);
+    if (response!.body['status'] == true) {
+      showCustomSnackBar('Otp verification has been successful');
+      Get.to(CreateNewPassword());
+    } else {
+      showCustomSnackBar('There is a problem in sending OTP');
+      // Get.find<AuthController>().logOut();
+    }
 
-  //   update();
-  // }
+    update();
+  }
 
-  // Future<void> resendOtp(String email) async {
-  //   _isLoading = true;
-  //   update();
-  //   Response? response = await authServiceInterface.resendOtp(email);
-  //   if (response!.body['status'] == true) {
-  //     showCustomSnackBar('Otp has been successful to your mail');
+  Future<void> resendOtp(String email) async {
+    _isLoading = true;
+    update();
+    Response? response = await authServiceInterface.resendOtp(email);
+    if (response!.body['status'] == true) {
+      showCustomSnackBar('Otp has been successful to your mail');
 
-  //     Get.to(OtpScreen());
-  //   }
+      Get.to(CodeVerificationScreen(email: email));
+    }
 
-  //   update();
-  // }
+    update();
+  }
 
-  // Future<void> forgetPassword(String emails) async {
-  //   email = emails;
-  //   _isLoading = true;
-  //   update();
+  Future<void> forgetPassword(String emails) async {
+    email = emails;
+    _isLoading = true;
+    update();
 
-  //   Response? response = await authServiceInterface.forgetPassword(emails);
+    Response? response = await authServiceInterface.forgetPassword(emails);
 
-  //   if (response?.statusCode == 201) {
-  //     _isLoading = false;
-  //     showCustomSnackBar('successfully sent otp');
-  //     // Get.to(CodeVerification(mail: emails,));
-  //   } else {
-  //     _isLoading = false;
-  //     showCustomSnackBar('invalid mail');
-  //   }
-  //   update();
-  // }
+    if (response?.statusCode == 201) {
+      _isLoading = false;
+      showCustomSnackBar('successfully sent otp');
+      // Get.to(CodeVerification(mail: emails,));
+    } else {
+      _isLoading = false;
+      showCustomSnackBar('invalid mail');
+    }
+    update();
+  }
 
-  // Future<void> resetPassword(String email, String newPassword) async {
-  //   _isLoading = true;
+  Future<void> resetPassword(String email, String newPassword) async {
+    _isLoading = true;
 
-  //   update();
+    update();
 
-  //   Response? response = await authServiceInterface.resetPassword(
-  //     email,
-  //     newPassword,
-  //   );
-  //   if (response!.statusCode == 200) {
-  //     // SnackBarWidget('password_change_successfully'.tr, isError: false);
-  //     showCustomSnackBar('Password Change Successfully');
-  //     Get.offAll(() => const LogIn());
-  //   } else {
-  //     showCustomSnackBar('Password Change was  Unsuccessfully');
-  //     ApiChecker.checkApi(response);
-  //   }
+    Response? response = await authServiceInterface.resetPassword(
+      email,
+      newPassword,
+    );
+    if (response!.statusCode == 200) {
+      // SnackBarWidget('password_change_successfully'.tr, isError: false);
+      showCustomSnackBar('Password Change Successfully');
+      Get.offAll(() => const SignInScreen());
+    } else {
+      showCustomSnackBar('Password Change was  Unsuccessfully');
+      ApiChecker.checkApi(response);
+    }
 
-  //   _isLoading = false;
+    _isLoading = false;
 
-  //   update();
-  // }
+    update();
+  }
 
-  // Future<void> changePassword(String password, String newPassword) async {
-  //   _isLoading = true;
-  //   update();
+  Future<void> changePassword(String password, String newPassword) async {
+    _isLoading = true;
+    update();
 
-  //   Response? response = await authServiceInterface.resetPassword(
-  //     password,
-  //     newPassword,
-  //   );
-  //   if (response!.statusCode == 200) {
-  //     showCustomSnackBar('Password Change Successfully');
-  //     logOut();
-  //     Get.offAll(() => const LogIn());
-  //   } else {
-  //     ApiChecker.checkApi(response);
-  //   }
+    Response? response = await authServiceInterface.resetPassword(
+      password,
+      newPassword,
+    );
+    if (response!.statusCode == 200) {
+      showCustomSnackBar('Password Change Successfully');
+      logOut();
+      Get.offAll(() => SignInScreen());
+    } else {
+      ApiChecker.checkApi(response);
+    }
 
-  //   _isLoading = false;
-  //   update();
-  // }
+    _isLoading = false;
+    update();
+  }
 
-  // bool updateFcm = false;
+  bool updateFcm = false;
 
-  // Future<void> updateAccessAndRefreshToken() async {
-  //   Response? response =
-  //       await authServiceInterface.updateAccessAndRefreshToken();
-  //   if (response?.statusCode == 200) {
-  //     String token = response!.body['accessToken'];
-  //     String refreshToken = response!.body['refreshToken'];
+  Future<void> updateAccessAndRefreshToken() async {
+    Response? response =
+        await authServiceInterface.updateAccessAndRefreshToken();
+    if (response?.statusCode == 200) {
+      String token = response!.body['accessToken'];
+      String refreshToken = response!.body['refreshToken'];
 
-  //     print('accessToken $token NOWW');
-  //     print('refreshToken $refreshToken');
+      print('accessToken $token NOWW');
+      print('refreshToken $refreshToken');
 
-  //     setUserToken(token, refreshToken);
-  //     updateFcm = false;
-  //   } else {
-  //     updateFcm = false;
-  //     ApiChecker.checkApi(response!);
-  //   }
+      setUserToken(token, refreshToken);
+      updateFcm = false;
+    } else {
+      updateFcm = false;
+      ApiChecker.checkApi(response!);
+    }
 
-  //   update();
-  // }
+    update();
+  }
 
-  // String _verificationCode = '';
-  // String _otp = '';
-  // String get otp => _otp;
-  // String get verificationCode => _verificationCode;
+  String _verificationCode = '';
+  String _otp = '';
+  String get otp => _otp;
+  String get verificationCode => _verificationCode;
 
-  // void updateVerificationCode(String query) {
-  //   _verificationCode = query;
-  //   if (_verificationCode.isNotEmpty) {
-  //     _otp = _verificationCode;
-  //   }
-  //   update();
-  // }
+  void updateVerificationCode(String query) {
+    _verificationCode = query;
+    if (_verificationCode.isNotEmpty) {
+      _otp = _verificationCode;
+    }
+    update();
+  }
 
-  // void clearVerificationCode() {
-  //   updateVerificationCode('');
-  //   _verificationCode = '';
-  //   update();
-  // }
+  void clearVerificationCode() {
+    updateVerificationCode('');
+    _verificationCode = '';
+    update();
+  }
 
-  // bool _isActiveRememberMe = false;
-  // bool get isActiveRememberMe => _isActiveRememberMe;
+  bool _isActiveRememberMe = false;
+  bool get isActiveRememberMe => _isActiveRememberMe;
 
-  // void toggleTerms() {
-  //   _acceptTerms = !_acceptTerms;
-  //   update();
-  // }
+  void toggleTerms() {
+    _acceptTerms = !_acceptTerms;
+    update();
+  }
 
-  // void toggleRememberMe() {
-  //   _isActiveRememberMe = !_isActiveRememberMe;
-  //   update();
-  // }
+  void toggleRememberMe() {
+    _isActiveRememberMe = !_isActiveRememberMe;
+    update();
+  }
 
-  // void setRememberMe() {
-  //   _isActiveRememberMe = true;
-  // }
+  void setRememberMe() {
+    _isActiveRememberMe = true;
+  }
 
-  // String getUserToken() {
-  //   return authServiceInterface.getUserToken();
-  // }
+  String getUserToken() {
+    return authServiceInterface.getUserToken();
+  }
 
-  // Future<void> setUserToken(String token, String refreshToken) async {
-  //   authServiceInterface.saveUserToken(token, refreshToken);
-  // }
+  Future<void> setUserToken(String token, String refreshToken) async {
+    authServiceInterface.saveUserToken(token, refreshToken);
+  }
 
-  // Future<bool> getFirsTimeInstall() async {
-  //   return authServiceInterface.isFirstTimeInstall();
-  // }
+  Future<bool> getFirsTimeInstall() async {
+    return authServiceInterface.isFirstTimeInstall();
+  }
 
   void setFirstTimeInstall() {
     return authServiceInterface.setFirstTimeInstall();

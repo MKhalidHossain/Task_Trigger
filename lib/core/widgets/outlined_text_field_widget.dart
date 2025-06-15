@@ -5,7 +5,7 @@ import '../utils/constants/app_colors.dart';
 class OutlinedTextFieldWidget extends StatefulWidget {
   final TextEditingController controller;
   // final String name;
-  final bool isLable;
+  //final bool isLable;
   final String? lebel;
   final TextInputType textInputType;
   final bool isObsecure;
@@ -13,8 +13,7 @@ class OutlinedTextFieldWidget extends StatefulWidget {
   OutlinedTextFieldWidget({
     super.key,
     required this.controller,
-
-    this.isLable = true,
+    //this.isLable = true,
     this.lebel,
     required this.textInputType,
     this.isObsecure = false,
@@ -51,7 +50,8 @@ class _OutlinedTextFieldWidgetState extends State<OutlinedTextFieldWidget> {
             controller: widget.controller,
             keyboardType: widget.textInputType,
             style: TextStyle(color: textColor),
-            obscureText: !_obscureText,
+
+            obscureText: widget.isObsecure && !_obscureText,
             decoration: InputDecoration(
               //labelText: isLable && lebel != null ? lebel : null,
               labelText: widget.lebel,
@@ -62,18 +62,21 @@ class _OutlinedTextFieldWidgetState extends State<OutlinedTextFieldWidget> {
               ),
               border: OutlineInputBorder(),
 
-              suffixIcon: widget.isObsecure 
-              ? IconButton(
-                icon: Icon(
-                  _obscureText ? Icons.visibility : Icons.visibility_off,
-                ),
-                onPressed: () {
-                  setState(() {
-                    _obscureText = !_obscureText;
-                  });
-                },
-              )
-               :null,
+              suffixIcon:
+                  widget.isObsecure
+                      ? IconButton(
+                        icon: Icon(
+                          _obscureText
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                      )
+                      : null,
 
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
