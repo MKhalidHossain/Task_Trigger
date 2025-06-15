@@ -78,7 +78,9 @@ class CreateNewTask extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 16),
+                WideCustomButton(text: 'Assign For Full Day', onPressed: () {}),
+                const SizedBox(height: 12),
                 OutlinedTextFieldforCreateWidget(
                   //name: 'Password',
                   lebel: 'Set Location',

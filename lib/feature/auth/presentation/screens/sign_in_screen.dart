@@ -30,6 +30,13 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   @override
+  void dispose() {
+    emailContoller.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ColoredBox(
       color: Color(0xff438B92),
@@ -105,27 +112,27 @@ class _SignInScreenState extends State<SignInScreen> {
                     WideCustomButton(
                       text: 'LOG IN',
                       onPressed: () {
-                        Get.to(BottomNevbar());
-                        // String email = emailContoller.text;
-                        // String password = passwordController.text;
-                        // if (email.isEmpty) {
-                        //   showAboutDialog(
-                        //     context: context,
-                        //     children: [Text('email is required'.tr)],
-                        //   );
-                        // } else if (password.isEmpty) {
-                        //   showAboutDialog(
-                        //     context: context,
-                        //     children: [Text('password_is_required'.tr)],
-                        //   );
-                        // } else if (password.length < 5) {
-                        //   showAboutDialog(
-                        //     context: context,
-                        //     children: [Text('minimum password length is 8')],
-                        //   );
-                        // } else {
-                        //   // authController.SignInScreen(email, password);
-                        // }
+                        //Get.to(BottomNevbar());
+                        String email = emailContoller.text;
+                        String password = passwordController.text;
+                        if (email.isEmpty) {
+                          showAboutDialog(
+                            context: context,
+                            children: [Text('email is required'.tr)],
+                          );
+                        } else if (password.isEmpty) {
+                          showAboutDialog(
+                            context: context,
+                            children: [Text('password_is_required'.tr)],
+                          );
+                        } else if (password.length < 5) {
+                          showAboutDialog(
+                            context: context,
+                            children: [Text('minimum password length is 8')],
+                          );
+                        } else {
+                         // authController.SignInScreen(email, password);
+                        }
                       },
                     ),
                     const SizedBox(height: 10),

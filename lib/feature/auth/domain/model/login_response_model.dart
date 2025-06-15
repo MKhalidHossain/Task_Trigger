@@ -1,82 +1,64 @@
 class LogInResponseModel {
   bool? status;
   String? message;
-  Data? data;
+  String? accessToken;
+  String? refreshToken;
+  User? user;
 
-  LogInResponseModel({this.status, this.message, this.data});
+  LogInResponseModel(
+      {this.status,
+      this.message,
+      this.accessToken,
+      this.refreshToken,
+      this.user});
 
   LogInResponseModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = status;
-    data['message'] = message;
-    if (this.data != null) {
-      data['data'] = this.data!.toJson();
-    }
-    return data;
-  }
-}
-
-class Data {
-  User? user;
-  String? accessToken;
-
-  Data({this.user, this.accessToken});
-
-  Data.fromJson(Map<String, dynamic> json) {
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
     accessToken = json['accessToken'];
+    refreshToken = json['refreshToken'];
+    user = json['user'] != null ? new User.fromJson(json['user']) : null;
   }
 
+  get data => null;
+
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    if (user != null) {
-      data['user'] = user!.toJson();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['status'] = this.status;
+    data['message'] = this.message;
+    data['accessToken'] = this.accessToken;
+    data['refreshToken'] = this.refreshToken;
+    if (this.user != null) {
+      data['user'] = this.user!.toJson();
     }
-    data['accessToken'] = accessToken;
     return data;
   }
 }
 
 class User {
   String? sId;
+  String? name;
   String? email;
+  Null? avatar;
   String? role;
-  String? profileImage;
-  String? refreshToken;
-  String? updatedAt;
 
-  User({
-    this.sId,
-    this.email,
-    this.role,
-    this.profileImage,
-    this.refreshToken,
-    this.updatedAt,
-  });
+  User({this.sId, this.name, this.email, this.avatar, this.role});
 
   User.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
+    name = json['name'];
     email = json['email'];
+    avatar = json['avatar'];
     role = json['role'];
-    profileImage = json['profileImage'];
-    refreshToken = json['refreshToken'];
-    updatedAt = json['updatedAt'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['_id'] = sId;
-    data['email'] = email;
-    data['role'] = role;
-    data['profileImage'] = profileImage;
-    data['refreshToken'] = refreshToken;
-    data['updatedAt'] = updatedAt;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['_id'] = this.sId;
+    data['name'] = this.name;
+    data['email'] = this.email;
+    data['avatar'] = this.avatar;
+    data['role'] = this.role;
     return data;
   }
 }

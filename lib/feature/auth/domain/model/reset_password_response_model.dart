@@ -1,21 +1,21 @@
 class ResetPasswordResponseModel {
   bool? status;
+  int? statusCode;
   String? message;
-  Null? data;
 
-  ResetPasswordResponseModel({this.status, this.message, this.data});
+  ResetPasswordResponseModel({this.status, this.statusCode, this.message});
 
   ResetPasswordResponseModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
+    statusCode = json['statusCode'];
     message = json['message'];
-    data = json['data'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = status;
-    data['message'] = message;
-    data['data'] = this.data;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['status'] = this.status;
+    data['statusCode'] = this.statusCode;
+    data['message'] = this.message;
     return data;
   }
 }
