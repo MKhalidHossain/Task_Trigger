@@ -6,11 +6,19 @@ class AuthService implements AuthServiceInterface {
 
   AuthService(this.authRepositoryInterface);
 
-
   @override
-  Future register(String name, String email, String password, String confirmPassword) {
-    // TODO: implement register
-    throw UnimplementedError();
+  Future register(
+    String name,
+    String email,
+    String password,
+    String confirmPassword,
+  ) async {
+    return await authRepositoryInterface.register(
+      name,
+      email,
+      password,
+      confirmPassword,
+    );
   }
 
   @override
@@ -19,34 +27,38 @@ class AuthService implements AuthServiceInterface {
   }
 
   @override
-  Future login(String email, String password) async{
+  Future login(String email, String password) async {
     return await authRepositoryInterface.login(email, password);
-
   }
 
   @override
-  Future changePassword(String? currentPassword, String newPassword, String confirmPassword) {
+  Future changePassword(
+    String? currentPassword,
+    String newPassword,
+    String confirmPassword,
+  ) {
     // TODO: implement changePassword
     throw UnimplementedError();
   }
+
   @override
-  Future forgetPassword(String? email) async{
+  Future forgetPassword(String? email) async {
     return await authRepositoryInterface.forgetPassword(email);
   }
 
   @override
-  Future verifyCode(String otp, String email) async{
+  Future verifyCode(String otp, String email) async {
     return await authRepositoryInterface.verifyCode(otp, email);
   }
 
   @override
-  Future resetPassword(String email, String newPassword) async{
-    return await authRepositoryInterface.resetPassword(email, newPassword);
+  Future resetPassword(String newPassword, String confirmNewPassword) async {
+    return await authRepositoryInterface.resetPassword(newPassword, confirmNewPassword);
   }
 
   @override
   bool isLoggedIn() {
-   return authRepositoryInterface.isLoggedIn();
+    return authRepositoryInterface.isLoggedIn();
   }
 
   @override
@@ -55,25 +67,19 @@ class AuthService implements AuthServiceInterface {
   }
 
   @override
-  Future<bool?> saveUserToken(String token, String refreshToken) async{
+  Future<bool?> saveUserToken(String token, String refreshToken) async {
     return await authRepositoryInterface.saveUserToken(token, refreshToken);
   }
 
   @override
   bool isFirstTimeInstall() {
-   return authRepositoryInterface.isFirstTimeInstall();
+    return authRepositoryInterface.isFirstTimeInstall();
   }
 
   @override
   void setFirstTimeInstall() {
     return authRepositoryInterface.setFirstTimeInstall();
   }
-
-
-
-
-
-
 
   @override
   bool clearSharedAddress() {
@@ -116,11 +122,4 @@ class AuthService implements AuthServiceInterface {
     // TODO: implement updateToken
     throw UnimplementedError();
   }
-  
-
-  
-
-  
-
-
 }

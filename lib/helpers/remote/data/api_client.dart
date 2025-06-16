@@ -289,8 +289,8 @@ class ApiClient extends GetxService {
 
     try {
       body = jsonDecode(response.body);
-      print(toString() + 'no fuck you');
-      print(body.toString());
+      print( 'no fuck you');
+     print(response.body.toString());
 
     }catch(e) {
       print(e.toString() + 'fuck you');

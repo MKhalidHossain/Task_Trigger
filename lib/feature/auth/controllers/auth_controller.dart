@@ -112,7 +112,9 @@ class AuthController extends GetxController implements GetxService {
       showCustomSnackBar('Welcome you have successfully Registered');
     } else {
       _isLoading = false;
-      ApiChecker.checkApi(response);
+      //ApiChecker.checkApi(response);
+
+      print(' pagol google ');
     }
     update();
   }
@@ -129,7 +131,6 @@ class AuthController extends GetxController implements GetxService {
       print("No response found");
     }
     if (response!.statusCode == 200) {
-      
       Map map = response.body;
       String token = '';
       String refreshToken = '';
@@ -139,10 +140,8 @@ class AuthController extends GetxController implements GetxService {
       logInResponseModel = LogInResponseModel.fromJson(response.body);
       refreshToken = logInResponseModel.refreshToken ?? '';
       token = logInResponseModel.accessToken ?? '';
-      print(
-        'accessToken $token NOWW Jonhnney  Bruites',
-      );
-      print('refreshToken $refreshToken NOWW Jonhnney  Bruites');
+      print('accessToken $token NOW Iwalker');
+      print('refreshToken $refreshToken NOW Iwalker');
       print(
         'User Token $token  ================================== from comtroller ',
       );
@@ -153,8 +152,7 @@ class AuthController extends GetxController implements GetxService {
       showCustomSnackBar('Welcome you have successfully Logged In');
 
       _isLoading = false;
-    } 
-    else if (response.statusCode == 202) {
+    } else if (response.statusCode == 202) {
       if (response.body['data']['is_phone_verified'] == 0) {}
     } else if (response.statusCode == 400) {
       Get.offAll(SignUpScreen());
@@ -266,26 +264,49 @@ class AuthController extends GetxController implements GetxService {
     update();
   }
 
-  Future<void> resetPassword(String email, String newPassword) async {
-    _isLoading = true;
+  // Future<void> resetPassword(String email, String newPassword) async {
+  //   _isLoading = true;
 
+  //   update();
+
+  //   Response? response = await authServiceInterface.resetPassword(
+  //     email,
+  //     newPassword,
+  //   );
+  //   if (response!.statusCode == 200) {
+  //     // SnackBarWidget('password_change_successfully'.tr, isError: false);
+  //     showCustomSnackBar('Password Change Successfully');
+  //     Get.offAll(() => const SignInScreen());
+  //   } else {
+  //     showCustomSnackBar('Password Change was  Unsuccessfully');
+  //     ApiChecker.checkApi(response);
+  //   }
+
+  //   _isLoading = false;
+
+  //   update();
+  // }
+
+  Future<void> resetPassword(
+    String newPassword,
+    String confirmNewPassword,
+  ) async {
+    _isLoading = true;
     update();
 
     Response? response = await authServiceInterface.resetPassword(
-      email,
       newPassword,
+      confirmNewPassword,
     );
     if (response!.statusCode == 200) {
-      // SnackBarWidget('password_change_successfully'.tr, isError: false);
       showCustomSnackBar('Password Change Successfully');
-      Get.offAll(() => const SignInScreen());
+      logOut();
+      Get.offAll(() => SignInScreen());
     } else {
-      showCustomSnackBar('Password Change was  Unsuccessfully');
       ApiChecker.checkApi(response);
     }
 
     _isLoading = false;
-
     update();
   }
 

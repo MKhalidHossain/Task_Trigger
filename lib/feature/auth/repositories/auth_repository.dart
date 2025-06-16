@@ -11,12 +11,17 @@ class AuthRepository implements AuthRepositoryInterface {
   AuthRepository({required this.apiClient, required this.sharedPreferences});
 
   @override
-  Future register(String fullName, String email, String password , String confirmPassword) async {
+  Future register(
+    String fullName,
+    String email,
+    String password,
+    String confirmPassword,
+  ) async {
     return await apiClient.postData(Urls.register, {
-      "fullName": fullName,
+      "name": fullName,
       "email": email,
       "password": password,
-      "confirmPassword": confirmPassword
+      "confirmPassword": confirmPassword,
     });
   }
 
@@ -49,10 +54,10 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future resetPassword(String email, String newPassword) async {
+  Future resetPassword(String newPassword, String confirmNewPassword) async {
     return await apiClient.postData(Urls.resetPassword, {
-      "email": email,
       "newPassword": newPassword,
+      "confirmNewPassword": confirmNewPassword,
     });
   }
 
@@ -82,7 +87,6 @@ class AuthRepository implements AuthRepositoryInterface {
     await sharedPreferences.setString(AppConstants.refreshToken, token);
     return await sharedPreferences.setString(AppConstants.token, token);
   }
-
 
   @override
   bool isFirstTimeInstall() {
@@ -129,9 +133,11 @@ class AuthRepository implements AuthRepositoryInterface {
   }
 
   @override
-  Future changePassword( String? currentPassword,
+  Future changePassword(
+    String? currentPassword,
     String newPassword,
-    String confirmPassword,) {
+    String confirmPassword,
+  ) {
     throw UnimplementedError();
   }
 

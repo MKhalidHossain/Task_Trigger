@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:iwalker/feature/auth/presentation/screens/sign_in_screen.dart';
-
 import 'feature/auth/controllers/auth_controller.dart';
 import 'helpers/dependency_injection.dart';
 
