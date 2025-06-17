@@ -4,12 +4,10 @@ import 'package:iwalker/core/themes/text_extensions.dart';
 import 'package:iwalker/core/widgets/wide_custom_button.dart';
 import 'package:iwalker/feature/auth/controllers/auth_controller.dart';
 import 'package:iwalker/utils/display_helper.dart';
-
 import '../../../../core/widgets/outlined_text_field_widget.dart';
-import 'code_verification_screen.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
-  ForgotPasswordScreen({super.key});
+  const ForgotPasswordScreen({super.key});
 
   @override
   State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();

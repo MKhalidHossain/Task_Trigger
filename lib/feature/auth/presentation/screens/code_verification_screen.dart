@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:iwalker/core/themes/text_extensions.dart';
 import 'package:iwalker/core/widgets/wide_custom_button.dart';
 import 'package:iwalker/feature/auth/controllers/auth_controller.dart';
-import 'package:iwalker/feature/auth/domain/model/authentication_model.dart';
 import 'package:iwalker/feature/auth/presentation/screens/create_new_password.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -45,7 +44,7 @@ class _CodeVerificationScreenState extends State<CodeVerificationScreen> {
   @override
   void dispose() {
     _timer?.cancel();
-    _otpController.dispose();
+
     super.dispose();
   }
 

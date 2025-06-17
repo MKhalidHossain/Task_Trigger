@@ -1,11 +1,16 @@
 import 'package:get/get.dart';
 import 'package:iwalker/core/constants/urls.dart';
+import 'package:iwalker/feature/profile/repositories/profile_repository_interface.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../feature/auth/controllers/auth_controller.dart';
 import '../feature/auth/repositories/auth_repository.dart';
 import '../feature/auth/repositories/auth_repository_interface.dart';
 import '../feature/auth/sevices/auth_service.dart';
 import '../feature/auth/sevices/auth_service_interface.dart';
+import '../feature/profile/controllers/profile_controller.dart';
+import '../feature/profile/repositories/profile_repository.dart';
+import '../feature/profile/services/profile_service.dart';
+import '../feature/profile/services/profile_service_interface.dart';
 import 'remote/data/api_client.dart';
 
 Future<void> initDI() async {
@@ -34,6 +39,87 @@ Future<void> initDI() async {
   Get.lazyPut(() => AuthController(authServiceInterface: Get.find()));
   Get.lazyPut(() => AuthService(Get.find()));
 
+
+
+//////////// Profile Service, Repository and Controller ////////////////////////////////
+///
+///
+
+
+  Get.lazyPut(() => ProfileRepository(apiClient: apiClient, sharedPreferences: prefs));
+  ProfileRepositoryInterface profileRepositoryInterface = ProfileRepository(apiClient: apiClient, sharedPreferences: prefs);
+  Get.lazyPut(() => profileRepositoryInterface);
+  ProfileServiceInterface profileServiceInterface = ProfileService(Get.find());
+
+  Get.lazyPut(() => profileServiceInterface);
+
+  Get.lazyPut(() => ProfileController( profileServiceInterface: Get.find()));
+
+  Get.lazyPut(() => ProfileService(Get.find()));
+
+
+
+
+  // Get.lazyPut(() => ProfileRepository(apiClient: apiClient, sharedPreferences: prefs));
+  // ProfileRepositoryInterface profileRepositoryInterface = ProfileRepository(apiClient: apiClient, sharedPreferences: prefs);
+  // Get.lazyPut(() => profileRepositoryInterface);
+  // ProfileServiceInterface profileServiceInterface = ProfileService(Get.find());
+
+  // Get.lazyPut(() => profileServiceInterface);
+
+  // Get.lazyPut(() => ProfileController(Get.find(), profileServiceInterface: Get.find()));
+
+  // Get.lazyPut(() => ProfileService(Get.find()));
+
+
+
+//
+
+
+
+
+//
+
+
+
+
+
+//
+
+
+  // ProfileRepositoryInterface profileRepositoryInterface = ProfileRepository(
+  //   Get.find(),
+  //   prefs,
+  // );
+
+  // Get.lazyPut(() => profileRepositoryInterface);
+
+  // ProfileServiceInterface profileServiceInterface = ProfileService(Get.find());
+
+  // Get.lazyPut(() => profileServiceInterface);
+
+  // Get.lazyPut(() => ProfilesController(Get.find()));
+
+  // Get.lazyPut(() => ProfileService(Get.find()));
+
+  ////////// Commanders Calls Service, Repository and Controller ////////////////////////////////
+
+  // Get.lazyPut(
+  //       () => ProfileRepository(Get.find(), prefs),
+  // );
+
+  // ProfileRepositoryInterface ProfileRepositoryInterface = ProfileRepository(Get.find(), prefs,);
+
+  // Get.lazyPut(() => ProfileRepositoryInterface);
+
+  // CommandersCallServiceInterface commandersCallServiceInterface = CommandersCallService(Get.find());
+
+  // Get.lazyPut(() => commandersCallServiceInterface);
+
+  // Get.lazyPut(() => CommandersCallsController(Get.find()));
+
+  // Get.lazyPut(() => CommandersCallService(Get.find()));
+
   //////////// Commanders Calls Service, Repository and Controller ////////////////////////////////
 
   // Get.lazyPut(
@@ -41,7 +127,6 @@ Future<void> initDI() async {
   // );
 
   // CommandersCallRepositoryInterface commandersCallRepositoryInterface = CommandersCallRepository(Get.find(), prefs,);
-
 
   // Get.lazyPut(() => commandersCallRepositoryInterface);
 
@@ -57,16 +142,11 @@ Future<void> initDI() async {
 
   // ////////////  Commanders Calls, Repository and Controller ////////////////////////////////
 
-
   // //////////// Auth Service, Repository and Controller ////////////////////////////////
-
-
-
 
   // //Get.lazyPut(() => ReviewRepository(Get.find(), prefs));
 
   // ReviewRepositoryInterface reviewRepositoryInterface = ReviewRepository(Get.find(), prefs,);
-
 
   // Get.lazyPut(() => reviewRepositoryInterface);
 
@@ -78,22 +158,16 @@ Future<void> initDI() async {
 
   // Get.lazyPut(() => ReviewService(Get.find()));
 
-
-
-//   // Registering the repository
-//   Get.lazyPut<ReviewRepositoryInterface>(() => ReviewRepository(Get.find(), prefs));
-//
-// // Registering the service
-//   Get.lazyPut<ReviewServiceInterface>(() => ReviewService(Get.find<ReviewRepositoryInterface>()));
-//
-// // Registering the controller
-//   Get.lazyPut<ReviewController>(() => ReviewController(Get.find<ReviewServiceInterface>()));
-
-
-
+  //   // Registering the repository
+  //   Get.lazyPut<ReviewRepositoryInterface>(() => ReviewRepository(Get.find(), prefs));
+  //
+  // // Registering the service
+  //   Get.lazyPut<ReviewServiceInterface>(() => ReviewService(Get.find<ReviewRepositoryInterface>()));
+  //
+  // // Registering the controller
+  //   Get.lazyPut<ReviewController>(() => ReviewController(Get.find<ReviewServiceInterface>()));
 
   ////////////  Commanders Calls, Repository and Controller ////////////////////////////////
-
 
   //////////// Commanders Calls Service, Repository and Controller ////////////////////////////////
 
@@ -107,44 +181,29 @@ Future<void> initDI() async {
 
   // CommandersServiceInterface commandersServiceInterface = CommandersService(commandersServiceInterface: Get.find());
 
-
   // Get.lazyPut(() => commandersService);
 
   // Get.lazyPut(()=> CommandersController(Get.find()));
 
   // Get.lazyPut(() => commandersService);
 
-
-
-
-
-
-
   //
 
+  // Get.lazyPut(()=> CommandersRepository(apiClient: Get.find(), sharedPreferences: prefs));
 
+  //   CommandersRepositoryInterface testRepositoryInterface = CommandersRepository(apiClient: Get.find(), sharedPreferences: prefs);
 
-// Get.lazyPut(()=> CommandersRepository(apiClient: Get.find(), sharedPreferences: prefs));
+  //   Get.lazyPut(()=> testRepositoryInterface);
 
-//   CommandersRepositoryInterface testRepositoryInterface = CommandersRepository(apiClient: Get.find(), sharedPreferences: prefs);
+  //   CommandersServiceInterface testCentreServiceInterface = CommandersService(commandersRepositoryInterface: Get.find());
 
-//   Get.lazyPut(()=> testRepositoryInterface);
+  //   Get.lazyPut(() => testCentreServiceInterface);
 
-//   CommandersServiceInterface testCentreServiceInterface = CommandersService(commandersRepositoryInterface: Get.find());
+  //   Get.lazyPut(()=> CommandersController(commandersServiceInterface: Get.find()));
 
-//   Get.lazyPut(() => testCentreServiceInterface);
-
-//   Get.lazyPut(()=> CommandersController(commandersServiceInterface: Get.find()));
-
-//   Get.lazyPut(()=> CommandersService(commandersRepositoryInterface: Get.find()));
-
-
-
-
-
+  //   Get.lazyPut(()=> CommandersService(commandersRepositoryInterface: Get.find()));
 
   //
-
 
   // //////////// Setting Service, Repository and Controller ////////////////////////////////
 

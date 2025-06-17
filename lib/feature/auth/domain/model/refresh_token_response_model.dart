@@ -13,7 +13,7 @@ class RefreshTokenResponseModel {
 
   Map<String, dynamic> toJson() {
     // ignore: prefer_collection_literals
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data['status'] = status;
     data['message'] = message;
     data['data'] = this.data;

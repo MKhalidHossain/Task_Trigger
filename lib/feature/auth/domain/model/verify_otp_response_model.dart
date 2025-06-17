@@ -15,11 +15,11 @@ class VerifyCodeResponseModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['statusCode'] = this.statusCode;
-    data['message'] = this.message;
-    data['accessToken'] = this.accessToken;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    data['statusCode'] = statusCode;
+    data['message'] = message;
+    data['accessToken'] = accessToken;
     return data;
   }
 }

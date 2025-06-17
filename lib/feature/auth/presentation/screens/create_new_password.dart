@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iwalker/core/themes/text_extensions.dart';
 import 'package:iwalker/feature/auth/controllers/auth_controller.dart';
-
 import '../../../../core/widgets/outlined_text_field_widget.dart';
 import '../../../../core/widgets/wide_custom_button.dart';
 
@@ -14,7 +13,6 @@ class CreateNewPassword extends StatefulWidget {
 }
 
 class _CreateNewPasswordState extends State<CreateNewPassword> {
-  @override
   // late Authenticaion authenticaion;
   bool isRemember = false;
 
