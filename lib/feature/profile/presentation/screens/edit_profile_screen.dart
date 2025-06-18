@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:iwalker/core/themes/text_extensions.dart';
 import 'package:iwalker/core/widgets/wide_custom_button.dart';
+import 'package:iwalker/feature/profile/domain/model/get_user_by_id_response_model.dart';
 import '../widgets/outlined_text_field_widget copy.dart';
 
 class EditProfile extends StatefulWidget {
-  EditProfile({super.key});
+  final UserforProfile userProfile;
+
+  const EditProfile({super.key, required this.userProfile}); 
+
+  
+
 
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -12,6 +18,7 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   late TextEditingController nameController;
+   //nameController = TextEditingController(text: widget.user.name ?? '');
 
   @override
   void initState() {

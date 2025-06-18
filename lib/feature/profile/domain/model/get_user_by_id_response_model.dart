@@ -2,58 +2,54 @@ class GetUserByIdResponseModel {
   bool? status;
   int? statusCode;
   String? message;
-  User? user;
+  UserforProfile? userforProfile;
 
   GetUserByIdResponseModel({
     this.status,
     this.statusCode,
     this.message,
-    this.user,
+    this.userforProfile,
   });
 
   GetUserByIdResponseModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     statusCode = json['statusCode'];
     message = json['message'];
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    userforProfile = json['user'] != null ? UserforProfile.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
     data['statusCode'] = statusCode;
     data['message'] = message;
-    if (user != null) {
-      data['user'] = user!.toJson();
-    }
+    if (userforProfile != null) {
+      data['user'] = userforProfile!.toJson();
+    } 
     return data;
   }
 }
 
-class User {
+class UserforProfile {
   String? id;
   String? name;
   String? email;
   String? avatar;
   String? role;
 
-  User({this.id, this.name, this.email, this.role});
+  UserforProfile({this.id, this.name, this.email, this.avatar, this.role});
 
-  User.fromJson(Map<String, dynamic> json) {
-    id = json['_id']; // ✅ Fix: using '_id' from backend
+  UserforProfile.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     name = json['name'];
     email = json['email'];
     avatar = json['avatar'];
     role = json['role'];
   }
 
-  // String get image => null;
-
-  // String get avatar => null;
-
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['_id'] = id; // Keep consistent with backend field
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
     data['name'] = name;
     data['email'] = email;
     data['avatar'] = avatar;

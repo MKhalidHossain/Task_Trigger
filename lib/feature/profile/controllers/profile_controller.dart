@@ -140,7 +140,7 @@ class ProfileController extends GetxController implements GetxService {
           response.body,
         );
 
-        print(getUserByIdResponseModel.user!.email);
+        print(getUserByIdResponseModel.userforProfile!.email);
         print('Call from Controller after model calls.');
       } else {
         // Get.find<AuthController>().logOut();
