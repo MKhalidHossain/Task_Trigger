@@ -9,7 +9,31 @@ import '../../../../core/widgets/linear_percent_bar_widget.dart';
 import '../../../../core/widgets/normal_custom_button.dart';
 
 class TaskWidgetTaskList extends StatelessWidget {
-  const TaskWidgetTaskList({super.key});
+  final String taskName;
+  final String taskDate;
+  final String taskStartTime;
+  final String taskEndTime;
+  // need to call Khalid vai to add this..............
+  //
+  //final String timeRemaining;
+  //final double percentComplete;
+  //
+  //
+  //final String location;
+  //final bool isFullDay;
+  //final bool notificationEnabled;
+  //final String createdAt;
+  // final String updatedAt;
+  final String taskId;
+
+  const TaskWidgetTaskList({
+    super.key,
+    required this.taskName,
+    required this.taskDate,
+    required this.taskStartTime,
+    required this.taskEndTime,
+    required this.taskId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,20 +57,23 @@ class TaskWidgetTaskList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                'GYM'.text20Black(),
+                taskName.text20Black(),
                 Row(
                   children: [
                     Icon(Icons.calendar_month_outlined, color: Colors.black),
                     const SizedBox(width: 8),
-                    '05 JUN 2025'.text16Black(),
+                    taskDate.text16Black(),
                   ],
                 ),
-                Row(
-                  children: [
-                    Icon(Icons.alarm, color: Colors.black),
-                    const SizedBox(width: 8),
-                    '10:00 AM - 11:00 AM'.text16Black(),
-                  ],
+                SizedBox(
+                  width: double.minPositive,
+                  child: Row(
+                    children: [
+                      Icon(Icons.alarm, color: Colors.black),
+                      const SizedBox(width: 8),
+                      '$taskStartTime - $taskEndTime'.text16Black(),
+                    ],
+                  ),
                 ),
                 'Time Remaining'.text16Black(),
                 LinearPercentBarWidget(percent: 50),
@@ -58,6 +85,8 @@ class TaskWidgetTaskList extends StatelessWidget {
               children: [
                 CircularPercentWidget(percent: 50, size: 70),
                 const SizedBox(height: 20),
+
+                //edit button
                 NormalCustomButton(
                   text: 'Edit',
                   showIcon: true,

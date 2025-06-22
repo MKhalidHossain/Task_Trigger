@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iwalker/core/themes/text_extensions.dart';
 import 'package:iwalker/feature/others/presentation/screens/notification_screen.dart';
+import 'package:iwalker/feature/profile/controllers/profile_controller.dart';
 import 'package:iwalker/feature/profile/presentation/screens/user_profile_screen.dart';
 import '../../../../core/widgets/default_circular_percent_widget.dart';
 import '../widgets/task_widget_home.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,7 +17,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    Get.find<ProfileController>().getUserById();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final String today = DateFormat('d MMMM').format(DateTime.now());
+
     return ColoredBox(
       color: Color(0xff438B92),
       child: SafeArea(
@@ -26,58 +36,79 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    height: 100,
-                    width: double.infinity,
+                  GetBuilder<ProfileController>(
+                    builder: (profileController) {
+                      return Container(
+                        padding: const EdgeInsets.all(16),
+                        height: 100,
+                        width: double.infinity,
 
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      color: Color(0xffC5DBDD),
-                    ),
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          child: CircleAvatar(
-                            radius: 30,
-                            backgroundImage: AssetImage(
-                              'assets/images/person.png',
-                            ),
-                          ),
-                          onTap: () {
-                            Get.to(UserProfileScreen());
-                          },
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          color: Color(0xffC5DBDD),
                         ),
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                              child: CircleAvatar(
+                                radius: 30,
+                                backgroundImage: NetworkImage(
+                                  profileController
+                                          .getUserByIdResponseModel
+                                          .userforProfile!
+                                          .avatar ??
+                                      'https://via.placeholder.com/150',
+                                ), // Placeholder image
+                                // AssetImage(
+                                //   'assets/images/person.png',
+                                // ),
+                              ),
+                              onTap: () {
+                                Get.to(UserProfileScreen());
+                              },
+                            ),
 
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 16.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 16.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    'Mr. User Name'.text16Black(),
-                                    'Today, 6 December'.text12Black(),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        profileController
+                                                .getUserByIdResponseModel
+                                                .userforProfile!
+                                                .name
+                                                ?.text18Black() ??
+                                            'Mr. User Name'.text18Black(),
+                                        const SizedBox(height: 4),
+                                        "Today, $today".text16Grey(),
+                                      ],
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        Get.to(NotificationScreen());
+                                      },
+                                      icon: Icon(
+                                        Icons.notifications_active_outlined,
+                                      ),
+                                    ),
                                   ],
                                 ),
-                                IconButton(
-                                  onPressed: () {
-                                    Get.to(NotificationScreen());
-                                  },
-                                  icon: Icon(
-                                    Icons.notifications_active_outlined,
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
+
                   const SizedBox(height: 16.0),
                   Container(
                     padding: const EdgeInsets.all(16),

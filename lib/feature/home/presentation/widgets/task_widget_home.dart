@@ -10,6 +10,20 @@ import '../../../../core/widgets/linear_percent_bar_widget.dart';
 import '../../../../core/widgets/normal_custom_button.dart';
 
 class TaskWidgetHome extends StatelessWidget {
+  //  final String taskName;
+  //   final String taskDate;
+  //   final String taskStartTime;
+  //   final String taskEndTime;
+  //   //
+  //   //required need to call Khalid vai to add this
+  //   //
+  //   //final String timeRemaining;
+  //   //final double percentComplete;
+  //   //final bool isFullDay;
+  //   //final bool notificationEnabled;
+  //   final String createdAt;
+  //   final String updatedAt;
+  //   final String taskId;
   const TaskWidgetHome({super.key});
 
   @override

@@ -7,10 +7,7 @@ import '../widgets/outlined_text_field_widget copy.dart';
 class EditProfile extends StatefulWidget {
   final UserforProfile userProfile;
 
-  const EditProfile({super.key, required this.userProfile}); 
-
-  
-
+  const EditProfile({super.key, required this.userProfile});
 
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -18,8 +15,7 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   late TextEditingController nameController;
-   //nameController = TextEditingController(text: widget.user.name ?? '');
-
+  // nameController = TextEditingController(text: widget.userProfile.name ?? '');
   @override
   void initState() {
     nameController = TextEditingController();
@@ -51,7 +47,9 @@ class _EditProfileState extends State<EditProfile> {
                       ),
                     ],
                   ),
-                  child: Image.asset(
+                  child:
+                  //NetworkImage(),
+                  Image.asset(
                     'assets/images/bg.png', // path to your image
                     fit: BoxFit.cover,
                     width: double.infinity,
@@ -98,18 +96,71 @@ class _EditProfileState extends State<EditProfile> {
                       children: [
                         Container(
                           margin: EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.1),
+                                spreadRadius: 2,
+                                blurRadius: 4,
+                                offset: Offset(
+                                  0,
+                                  2,
+                                ), // changes position of shadow
+                              ),
+                            ],
+                          ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Image.asset(
-                                'assets/images/person.png',
-                                width: 170,
-                                height: 170,
-                                alignment: Alignment.center,
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.transparent,
+                                  borderRadius: BorderRadius.circular(16),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.1),
+                                      spreadRadius: 2,
+                                      blurRadius: 4,
+                                      offset: Offset(
+                                        0,
+                                        2,
+                                      ), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                                child:
+                                    widget.userProfile.avatar != null &&
+                                            widget
+                                                .userProfile
+                                                .avatar!
+                                                .isNotEmpty
+                                        ? Image.network(
+                                          widget.userProfile.avatar!,
+                                          width: 170,
+                                          height: 170,
+                                          fit: BoxFit.cover,
+                                          errorBuilder:
+                                              (context, error, stackTrace) =>
+                                                  Image.asset(
+                                                    'assets/images/person.png',
+                                                    width: 170,
+                                                    height: 170,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                        )
+                                        : Image.asset(
+                                          'assets/images/person.png',
+                                          width: 170,
+                                          height: 170,
+                                          fit: BoxFit.cover,
+                                        ),
                               ),
                               const SizedBox(height: 10),
-                              'Mr. User Name'.text24Black(),
+                              (widget.userProfile.name ?? 'Mr. User Name')
+                                  .text24Black(),
                             ],
                           ),
                         ),

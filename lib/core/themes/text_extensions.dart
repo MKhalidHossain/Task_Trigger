@@ -66,6 +66,16 @@ extension TextStylingExtension on String {
     ),
   );
 
+  Text text18Black() => Text(
+    this,
+    style: const TextStyle(
+      fontSize: 18,
+      fontFamily: _fontFamily,
+      fontWeight: FontWeight.w400,
+      color: Color(0xFF000000),
+    ),
+  );
+
   // TextSize 16
   Text text16White() => Text(
     this,
