@@ -4,6 +4,7 @@ import 'package:iwalker/core/themes/text_extensions.dart';
 import 'package:iwalker/feature/others/presentation/screens/notification_screen.dart';
 import 'package:iwalker/feature/profile/controllers/profile_controller.dart';
 import 'package:iwalker/feature/profile/presentation/screens/user_profile_screen.dart';
+import 'package:iwalker/feature/task/controllers/task_controller.dart';
 import '../../../../core/widgets/default_circular_percent_widget.dart';
 import '../widgets/task_widget_home.dart';
 import 'package:intl/intl.dart';
@@ -19,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     Get.find<ProfileController>().getUserById();
+    Get.find<TaskController>().getAllTasks();
     super.initState();
   }
 
@@ -144,15 +146,62 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(height: 16.0),
 
                   //....................................................when api integration nedd to be raw code here .............................................................
-                  TaskWidgetHome(),
-
-                  const SizedBox(height: 16.0),
-                  TaskWidgetHome(),
-                  const SizedBox(height: 16.0),
-                  TaskWidgetHome(),
-
-                  const SizedBox(height: 16.0),
-                  TaskWidgetHome(),
+                  GetBuilder<TaskController>(
+                    builder: (taskController) {
+                      if (taskController
+                          .getAllTasksResponseModel
+                          .data!
+                          .isEmpty) {
+                        print('task is empty');
+                        return Container(
+                          height: 100,
+                          width: double.infinity,
+                          child: const Center(child: Text('No Task Found')),
+                        );
+                      }
+                      if (taskController.getAllTasksResponseModel.data! ==
+                          null) {
+                        print('TAsk is null');
+                        return Center(
+                          child: const Center(
+                            child: Text(
+                              textAlign: TextAlign.center,
+                              'No Task Found',
+                            ),
+                          ),
+                        );
+                      }
+                      return !taskController.getAllTasksIsLoading
+                          ? ListView.builder(
+                            shrinkWrap: true,
+                            itemCount:
+                                taskController
+                                    .getAllTasksResponseModel
+                                    .data!
+                                    .length,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              var item =
+                                  taskController
+                                      .getAllTasksResponseModel
+                                      .data![index];
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                  // left: 16.0,
+                                  // right: 16.0,
+                                  bottom: 16.0,
+                                ),
+                                child: TaskWidgetHome(
+                                  taskName: item.name!,
+                                  taskStartTime: item.startTime ?? 'Start Time',
+                                  taskEndTime: item.endTime ?? 'End Time',
+                                ),
+                              );
+                            },
+                          )
+                          : Center(child: CircularProgressIndicator());
+                    },
+                  ),
                 ],
               ),
             ),

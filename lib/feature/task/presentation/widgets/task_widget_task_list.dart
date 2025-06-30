@@ -52,6 +52,8 @@ class TaskWidgetTaskList extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
+
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +68,7 @@ class TaskWidgetTaskList extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  width: double.minPositive,
+                  //width: double.minPositive,
                   child: Row(
                     children: [
                       Icon(Icons.alarm, color: Colors.black),

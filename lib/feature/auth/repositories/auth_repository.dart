@@ -134,11 +134,15 @@ class AuthRepository implements AuthRepositoryInterface {
 
   @override
   Future changePassword(
-    String? currentPassword,
+    String currentPassword,
     String newPassword,
     String confirmPassword,
-  ) {
-    throw UnimplementedError();
+  ) async {
+    return await apiClient.putData(Urls.changePassword, {
+      "currentPassword": currentPassword,
+      "newPassword": newPassword,
+      "confirmNewPassword": confirmPassword,
+    });
   }
 
   @override

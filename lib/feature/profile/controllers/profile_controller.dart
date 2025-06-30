@@ -21,6 +21,7 @@ class ProfileController extends GetxController implements GetxService {
   // late AddANewCommanderResponseModel addANewCommanderResponseModel;
 
   bool isLoading = false;
+  bool getUserByIdisLoading = false;
 
   get commandersList => null;
 
@@ -124,7 +125,7 @@ class ProfileController extends GetxController implements GetxService {
 
   Future<void> getUserById() async {
     try {
-      isLoading = true;
+      getUserByIdisLoading = true;
       print("Getting all User Info");
 
       var response = await profileServiceInterface.getUserById();
@@ -154,7 +155,7 @@ class ProfileController extends GetxController implements GetxService {
         print(e);
       }
     }
-    isLoading = false;
+    getUserByIdisLoading = false;
     update();
   }
 

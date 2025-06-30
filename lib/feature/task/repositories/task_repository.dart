@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/constants/urls.dart';
@@ -9,9 +10,9 @@ class TaskRepository implements TaskRepositoryInterface {
   final SharedPreferences sharedPreferences;
 
   TaskRepository({required this.apiClient, required this.sharedPreferences});
-  
+
   @override
-  Future addTask(
+  Future<Response> addTask(
     String name,
     String date,
     String startTime,
@@ -30,12 +31,12 @@ class TaskRepository implements TaskRepositoryInterface {
   }
 
   @override
-  Future deleteTask(String id) {
+  Future<Response> deleteTask(String id) {
     return apiClient.deleteData(Urls.deleteTask + id);
   }
 
   @override
-  Future editTask(
+  Future<Response> editTask(
     String name,
     String date,
     String startTime,
@@ -55,12 +56,12 @@ class TaskRepository implements TaskRepositoryInterface {
   }
 
   @override
-  Future getAllTasks() {
-    return apiClient.getData(Urls.getAllTasks);
+  Future<Response> getAllTasks() async {
+    return await apiClient.getData(Urls.getAllTasks);
   }
 
   @override
-  Future getRequestById(String id) {
+  Future<Response> getRequestById(String id) {
     return apiClient.getData(Urls.getRequestById + id);
   }
 }

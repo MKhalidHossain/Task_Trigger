@@ -33,12 +33,11 @@ class AuthService implements AuthServiceInterface {
 
   @override
   Future changePassword(
-    String? currentPassword,
+    String currentPassword,
     String newPassword,
     String confirmPassword,
-  ) {
-    // TODO: implement changePassword
-    throw UnimplementedError();
+  ) async{
+    return await authRepositoryInterface.changePassword(currentPassword, newPassword, confirmPassword);
   }
 
   @override

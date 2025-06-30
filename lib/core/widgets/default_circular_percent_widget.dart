@@ -34,6 +34,7 @@ class _CircularPercentWidgetState extends State<CircularPercentWidget> {
             width: widget.size,
             height: widget.size,
             child: CircularProgressIndicator(
+              strokeCap: StrokeCap.round,
               value: progressValue,
               strokeWidth: strokeWidth,
               valueColor: AlwaysStoppedAnimation<Color>(

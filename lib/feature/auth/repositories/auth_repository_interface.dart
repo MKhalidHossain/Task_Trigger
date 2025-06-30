@@ -10,7 +10,7 @@ abstract class AuthRepositoryInterface{
   Future<dynamic> login(String email,  String password);
   Future<dynamic> accessAndRefreshToken(String refreshToken);
   Future<dynamic> changePassword(
-    String? currentPassword,
+    String currentPassword,
     String newPassword,
     String confirmPassword,
   );

@@ -19,6 +19,8 @@ class AuthController extends GetxController implements GetxService {
 
   AuthController({required this.authServiceInterface});
 
+  bool changePasswordIsLoading = false;
+
   bool _isLoading = false;
   bool _acceptTerms = false;
   bool get isLoading => _isLoading;
@@ -310,23 +312,39 @@ class AuthController extends GetxController implements GetxService {
     update();
   }
 
-  Future<void> changePassword(String password, String newPassword) async {
-    _isLoading = true;
+  Future<void> changePassword(
+    String currentPassword,
+    String newPassword,
+    String confirmPassword,
+  ) async {
+    changePasswordIsLoading = true;
     update();
 
-    Response? response = await authServiceInterface.resetPassword(
-      password,
-      newPassword,
-    );
-    if (response!.statusCode == 200) {
-      showCustomSnackBar('Password Change Successfully');
-      logOut();
-      Get.offAll(() => SignInScreen());
-    } else {
-      ApiChecker.checkApi(response);
+    try {
+      Response? response = await authServiceInterface.changePassword(
+        currentPassword,
+        newPassword,
+        confirmPassword,
+      );
+
+      print("Check the response data-> ${response}");
+
+      if (response!.statusCode == 200) {
+        showCustomSnackBar('Password Change Successfully');
+        // logOut();
+        Get.offAll(() => SignInScreen());
+      } else {
+        ApiChecker.checkApi(response);
+      }
+    } catch (e) {
+      print("❌ Error changing password: $e");
+      showCustomSnackBar(
+        "Something went wrong. Please try again later.",
+        isError: true,
+      );
     }
 
-    _isLoading = false;
+    changePasswordIsLoading = false;
     update();
   }
 

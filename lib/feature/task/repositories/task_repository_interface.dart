@@ -1,6 +1,8 @@
+import 'package:get/get_connect/http/src/response/response.dart';
+
 abstract class TaskRepositoryInterface {
 
-  Future<dynamic> addTask(
+  Future<Response> addTask(
     String name,
     String date,
     String startTime,
@@ -8,9 +10,9 @@ abstract class TaskRepositoryInterface {
     String location,
     bool isFullDay,
   );
-  Future<dynamic> getAllTasks();
-  Future<dynamic> getRequestById(String id);
-  Future<dynamic> editTask(
+  Future<Response> getAllTasks();
+  Future<Response> getRequestById(String id);
+  Future<Response> editTask(
     String name,
     String date,
     String startTime,
@@ -19,5 +21,5 @@ abstract class TaskRepositoryInterface {
     bool isFullDay,
     String id,
   );
-  Future<dynamic> deleteTask(String id);
+  Future<Response> deleteTask(String id);
 }

@@ -112,26 +112,39 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             String currentPassword =
                                 currentPasswordContoller.text;
                             String newPassword = newPasswordController.text;
-                            String confirmNewPassword =
+                            String confirmPassword =
                                 confirmNewPasswordController.text;
                             if (currentPassword.isEmpty &&
                                 newPassword.isEmpty &&
-                                confirmNewPassword.isEmpty) {
+                                confirmPassword.isEmpty) {
                               showAboutDialog(
                                 context: context,
-                                children: [Text('email is required'.tr)],
+                                children: [Text('All fields is required'.tr)],
                               );
-                            } else if (currentPassword.length < 8 &&
-                                newPassword.length < 8 &&
-                                (confirmNewPassword.length < 8)) {
+                            } else if (currentPassword.length < 5 &&
+                                newPassword.length < 5 &&
+                                (confirmPassword.length < 5)) {
                               showAboutDialog(
                                 context: context,
                                 children: [
                                   Text('minimum password length is 8'),
                                 ],
                               );
+                            } else if (newPassword != confirmPassword) {
+                              showAboutDialog(
+                                context: context,
+                                children: [
+                                  Text(
+                                    'New password should not be same as current password',
+                                  ),
+                                ],
+                              );
                             } else {
-                              // authController.SignIn(email, password);
+                              authController.changePassword(
+                                currentPassword,
+                                newPassword,
+                                confirmPassword,
+                              );
                             }
                           },
                         ),

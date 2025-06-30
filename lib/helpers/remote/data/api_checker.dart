@@ -17,7 +17,7 @@ class ApiChecker {
         showCustomSnackBar(response.body['message']!);
       }
     } else {
-      showCustomSnackBar(response.statusText! + 'Khalid bai motu pagol');
+      showCustomSnackBar(response.statusText! + 'Khalids this is Status Code');
     }
   }
 }

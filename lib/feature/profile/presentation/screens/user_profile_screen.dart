@@ -29,10 +29,30 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     final String today = DateFormat('d MMMM').format(DateTime.now());
     return GetBuilder<ProfileController>(
       builder: (profileController) {
-        return !profileController.isLoading
+        if (profileController
+            .getUserByIdResponseModel
+            .userforProfile
+            .isBlank!) {
+          print('task is empty');
+          return Container(
+            height: size.height * 0.8,
+            width: size.width,
+            child: const Center(child: Text('No Task Found')),
+          );
+        }
+        if (profileController.getUserByIdResponseModel == null) {
+          print('TAsk is null');
+          return Container(
+            height: size.height * 0.8,
+            width: size.width,
+            child: const Center(child: Text('No Task Found')),
+          );
+        }
+        return !profileController.getUserByIdisLoading
             ? ColoredBox(
               color: Color(0xFF438B92),
               child: SafeArea(
@@ -129,10 +149,9 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     (profileController
-                                                .getUserByIdResponseModel
-                                                .userforProfile!
-                                                .name! ??
-                                            'No Name')
+                                            .getUserByIdResponseModel
+                                            .userforProfile!
+                                            .name!)
                                         .text24Black(),
                                     SizedBox(height: 4),
                                     "Today, $today".text16Grey(),
@@ -205,7 +224,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                                   ),
                                   _divider(),
                                   _buildMenuItem(
-                                    Icons.lock_outline,
+                                    Icons.notifications_outlined,
                                     "Notification",
                                     onTap: () {
                                       Get.to(NotificationScreen());

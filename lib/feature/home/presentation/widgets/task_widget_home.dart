@@ -10,21 +10,27 @@ import '../../../../core/widgets/linear_percent_bar_widget.dart';
 import '../../../../core/widgets/normal_custom_button.dart';
 
 class TaskWidgetHome extends StatelessWidget {
-  //  final String taskName;
+  final String taskName;
   //   final String taskDate;
-  //   final String taskStartTime;
-  //   final String taskEndTime;
+  final String taskStartTime;
+  final String taskEndTime;
+
+  const TaskWidgetHome({
+    super.key,
+    required this.taskName,
+    required this.taskStartTime,
+    required this.taskEndTime,
+  });
   //   //
   //   //required need to call Khalid vai to add this
   //   //
-  //   //final String timeRemaining;
+  //final String timeRemaining;
   //   //final double percentComplete;
   //   //final bool isFullDay;
   //   //final bool notificationEnabled;
   //   final String createdAt;
   //   final String updatedAt;
   //   final String taskId;
-  const TaskWidgetHome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +53,12 @@ class TaskWidgetHome extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                'GYM'.text20Black(),
+                taskName.text20Black(),
                 Row(
                   children: [
                     Icon(Icons.alarm, color: Colors.black),
                     const SizedBox(width: 8),
-                    '10:00 AM - 11:00 AM'.text16Black(),
+                    '$taskStartTime - $taskEndTime'.text16Black(),
                   ],
                 ),
                 'Time Remaining'.text16Black(),

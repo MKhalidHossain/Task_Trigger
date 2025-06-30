@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:iwalker/core/constants/urls.dart';
 import 'package:iwalker/feature/profile/repositories/profile_repository_interface.dart';
+import 'package:iwalker/feature/task/controllers/task_controller.dart';
+import 'package:iwalker/feature/task/services/task_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../feature/auth/controllers/auth_controller.dart';
 import '../feature/auth/repositories/auth_repository.dart';
@@ -11,6 +13,9 @@ import '../feature/profile/controllers/profile_controller.dart';
 import '../feature/profile/repositories/profile_repository.dart';
 import '../feature/profile/services/profile_service.dart';
 import '../feature/profile/services/profile_service_interface.dart';
+import '../feature/task/repositories/task_repository.dart';
+import '../feature/task/repositories/task_repository_interface.dart';
+import '../feature/task/services/task_service_interface.dart';
 import 'remote/data/api_client.dart';
 
 Future<void> initDI() async {
@@ -39,26 +44,55 @@ Future<void> initDI() async {
   Get.lazyPut(() => AuthController(authServiceInterface: Get.find()));
   Get.lazyPut(() => AuthService(Get.find()));
 
+  //////////// Profile Service, Repository and Controller ////////////////////////////////
+  ///
+  ///
 
-
-//////////// Profile Service, Repository and Controller ////////////////////////////////
-///
-///
-
-
-  Get.lazyPut(() => ProfileRepository(apiClient: apiClient, sharedPreferences: prefs));
-  ProfileRepositoryInterface profileRepositoryInterface = ProfileRepository(apiClient: apiClient, sharedPreferences: prefs);
+  Get.lazyPut(
+    () => ProfileRepository(apiClient: apiClient, sharedPreferences: prefs),
+  );
+  ProfileRepositoryInterface profileRepositoryInterface = ProfileRepository(
+    apiClient: apiClient,
+    sharedPreferences: prefs,
+  );
   Get.lazyPut(() => profileRepositoryInterface);
   ProfileServiceInterface profileServiceInterface = ProfileService(Get.find());
-
   Get.lazyPut(() => profileServiceInterface);
-
-  Get.lazyPut(() => ProfileController( profileServiceInterface: Get.find()));
-
+  Get.lazyPut(() => ProfileController(profileServiceInterface: Get.find()));
   Get.lazyPut(() => ProfileService(Get.find()));
 
+  //////////// Task Service, Repository and Controller ////////////////////////////////
+  ///
+  ///
+  Get.lazyPut(
+    () => TaskRepository(apiClient: apiClient, sharedPreferences: prefs),
+  );
+  TaskRepositoryInterface taskRepositoryInterface = TaskRepository(
+    apiClient: Get.find(),
+    sharedPreferences: prefs,
+  );
+  Get.lazyPut(() => taskRepositoryInterface);
+  TaskServiceInterface taskServiceInterface = TaskService(
+    taskRepositoryInterface: Get.find(),
+  );
+  Get.lazyPut(() => taskServiceInterface);
+  Get.lazyPut(() => TaskController(taskServiceInterface: Get.find()));
+  Get.lazyPut(() => TaskService(taskRepositoryInterface: Get.find()));
 
+  // // 2. Register repository
+  // Get.lazyPut<TaskRepositoryInterface>(() => TaskRepository(
+  //   apiClient: Get.find<ApiClient>(),
+  //   sharedPreferences: prefs,
+  // ));
 
+  // // 3. Register service interface with correct binding
+  // Get.lazyPut<TaskServiceInterface>(() => TaskService(
+  //   Get.find<ApiClient>(),
+  //   taskRepositoryInterface: Get.find<TaskRepositoryInterface>(),
+  // ));
+
+  // // 4. Register controller
+  // Get.lazyPut(() => TaskController(taskServiceInterface: Get.find<TaskServiceInterface>()));
 
   // Get.lazyPut(() => ProfileRepository(apiClient: apiClient, sharedPreferences: prefs));
   // ProfileRepositoryInterface profileRepositoryInterface = ProfileRepository(apiClient: apiClient, sharedPreferences: prefs);
@@ -71,21 +105,11 @@ Future<void> initDI() async {
 
   // Get.lazyPut(() => ProfileService(Get.find()));
 
+  //
 
+  //
 
-//
-
-
-
-
-//
-
-
-
-
-
-//
-
+  //
 
   // ProfileRepositoryInterface profileRepositoryInterface = ProfileRepository(
   //   Get.find(),
