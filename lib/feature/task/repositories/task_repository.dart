@@ -12,15 +12,15 @@ class TaskRepository implements TaskRepositoryInterface {
   TaskRepository({required this.apiClient, required this.sharedPreferences});
 
   @override
-  Future<Response> addTask(
+  Future<Response> addTask (
     String name,
     String date,
     String startTime,
     String endTime,
     String location,
     bool isFullDay,
-  ) {
-    return apiClient.postData(Urls.addTask, {
+  ) async{
+    return await apiClient.postData(Urls.addTask, {
       "name": name,
       "date": date,
       "startTime": startTime,
@@ -31,8 +31,8 @@ class TaskRepository implements TaskRepositoryInterface {
   }
 
   @override
-  Future<Response> deleteTask(String id) {
-    return apiClient.deleteData(Urls.deleteTask + id);
+  Future<Response> deleteTask(String id) async {
+    return await apiClient.deleteData(Urls.deleteTask + id);
   }
 
   @override
@@ -44,8 +44,8 @@ class TaskRepository implements TaskRepositoryInterface {
     String location,
     bool isFullDay,
     String id,
-  ) {
-    return apiClient.putData(Urls.editTask + id, {
+  )async {
+    return await apiClient.putData(Urls.editTask + id, {
       "name": name,
       "date": date,
       "startTime": startTime,
@@ -61,7 +61,7 @@ class TaskRepository implements TaskRepositoryInterface {
   }
 
   @override
-  Future<Response> getRequestById(String id) {
-    return apiClient.getData(Urls.getRequestById + id);
+  Future<Response> getRequestById(String id) async{
+    return await apiClient.getData(Urls.getRequestById + id);
   }
 }

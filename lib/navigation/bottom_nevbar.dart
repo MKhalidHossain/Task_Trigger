@@ -7,7 +7,6 @@ import 'package:iwalker/feature/task/presentation/screens/create_new_task.dart';
 import 'package:motion_tab_bar/MotionTabBar.dart';
 import 'package:motion_tab_bar/MotionTabBarController.dart';
 
-
 class BottomNevbar extends StatefulWidget {
   const BottomNevbar({Key? key, this.title}) : super(key: key);
 
@@ -17,7 +16,8 @@ class BottomNevbar extends StatefulWidget {
   _BottomNevbarState createState() => _BottomNevbarState();
 }
 
-class _BottomNevbarState extends State<BottomNevbar> with TickerProviderStateMixin {
+class _BottomNevbarState extends State<BottomNevbar>
+    with TickerProviderStateMixin {
   // TabController? _tabController;
   MotionTabBarController? _motionTabBarController;
 
@@ -33,7 +33,7 @@ class _BottomNevbarState extends State<BottomNevbar> with TickerProviderStateMix
 
     //// use "MotionTabBarController" to replace with "TabController", if you need to programmatically change the tab
     _motionTabBarController = MotionTabBarController(
-      initialIndex: 1,
+      initialIndex: 0,
       length: 5,
       vsync: this,
     );
@@ -49,30 +49,21 @@ class _BottomNevbarState extends State<BottomNevbar> with TickerProviderStateMix
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: MotionTabBar(
-        controller: _motionTabBarController, // Add this controller if you need to change your tab programmatically
+        controller:
+            _motionTabBarController, // Add this controller if you need to change your tab programmatically
         initialSelectedTab: "Home",
         useSafeArea: true, // default: true, apply safe area wrapper
-        labels: const [
-          'Home',
-          'Tasks',
-          'New Task',
-          'Report',
-          'Profile',],
+        labels: const ['Home', 'Tasks', 'New Task', 'Report', 'Profile'],
         icons: const [
           Icons.home_outlined,
           Icons.task_outlined,
           Icons.add_circle_outline, // dummy - handled separately
           Icons.trending_up_outlined,
-          Icons.person_outline,],
+          Icons.person_outline,
+        ],
 
         // optional badges, length must be same with labels
-        badges: [
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
+        badges: [null, null, null, null, null],
         tabSize: 50,
         tabBarHeight: 55,
         textStyle: const TextStyle(
@@ -93,18 +84,17 @@ class _BottomNevbarState extends State<BottomNevbar> with TickerProviderStateMix
         },
       ),
       body: TabBarView(
-        physics: const NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
+        physics:
+            const NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
         controller: _motionTabBarController,
         children: <Widget>[
           HomeScreen(),
           AllTaskLists(),
           CreateNewTask(),
           AllTaskLists(),
-          UserProfileScreen()
-
+          UserProfileScreen(),
         ],
       ),
-
     );
   }
 }

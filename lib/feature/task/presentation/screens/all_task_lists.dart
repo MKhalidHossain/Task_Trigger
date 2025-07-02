@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:iwalker/core/themes/text_extensions.dart';
 import 'package:iwalker/feature/task/presentation/widgets/task_widget_task_list.dart';
 
@@ -23,7 +22,7 @@ class _AllTaskListsState extends State<AllTaskLists> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    
+
     return GetBuilder<TaskController>(
       builder: (taskController) {
         if (taskController.getAllTasksResponseModel.data!.isEmpty) {
@@ -82,6 +81,8 @@ class _AllTaskListsState extends State<AllTaskLists> {
                                 taskStartTime: d.startTime!,
                                 taskEndTime: d.endTime!,
                                 taskId: d.sId!,
+                                taskLocation: d.location!,
+                                isFullDay: d.isFullDay!,
                               ),
                             );
                           },

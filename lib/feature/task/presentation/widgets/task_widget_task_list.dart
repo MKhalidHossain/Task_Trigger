@@ -13,6 +13,8 @@ class TaskWidgetTaskList extends StatelessWidget {
   final String taskDate;
   final String taskStartTime;
   final String taskEndTime;
+  final String taskLocation;
+  final bool isFullDay;
   // need to call Khalid vai to add this..............
   //
   //final String timeRemaining;
@@ -33,6 +35,8 @@ class TaskWidgetTaskList extends StatelessWidget {
     required this.taskStartTime,
     required this.taskEndTime,
     required this.taskId,
+    required this.taskLocation,
+    required this.isFullDay,
   });
 
   @override
@@ -94,7 +98,18 @@ class TaskWidgetTaskList extends StatelessWidget {
                   showIcon: true,
                   sufixIcon: Icons.edit_outlined,
                   onPressed: () {
-                    Get.to(CreateNewTask());
+                    Get.to(
+                      CreateNewTask(
+                        isEditing: true,
+                        taskId: taskId, // if needed for update
+                        existingTaskName: taskName,
+                        existingDate: taskDate,
+                        existingStartTime: taskStartTime,
+                        existingEndTime: taskEndTime,
+                        existingLocation: taskLocation,
+                        existingIsFullDay: isFullDay,
+                      ),
+                    );
                   },
                 ),
               ],

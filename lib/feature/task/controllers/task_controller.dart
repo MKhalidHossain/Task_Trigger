@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:iwalker/feature/task/domain/model/add_task_response_model.dart';
+import 'package:iwalker/feature/task/domain/model/edit_task_response_model.dart';
 import 'package:iwalker/feature/task/domain/model/get_all_tasks_response_model.dart';
 import 'package:iwalker/feature/task/services/task_service_interface.dart';
 import '../../../helpers/remote/data/api_client.dart';
@@ -11,6 +12,8 @@ class TaskController extends GetxController implements GetxService {
   TaskController({required this.taskServiceInterface});
 
   late AddTaskResponseModel addTaskResponseModel;
+
+  late EditTaskResponseModel editTaskResponseModel;
 
   // late SingleCommandersResponseModel commander;
 
@@ -23,6 +26,8 @@ class TaskController extends GetxController implements GetxService {
   bool isloading = false;
 
   bool getAllTasksIsLoading = false;
+
+  bool addTaskIsLoading = false;
 
   get commandersList => null;
 
@@ -56,48 +61,93 @@ class TaskController extends GetxController implements GetxService {
     update();
   }
 
-  // Future<void> addTask(
-  //   String name,
-  //   String date,
-  //   String startTime,
-  //   String endTime,
-  //   String location,
-  //   bool isFullDay,
-  // ) async {
-  //   try {
-  //     isLoading = true;
-  //     print("Getting all commanders\n\n\n");
+  Future<void> addTask(
+    String name,
+    String date,
+    String startTime,
+    String endTime,
+    String location,
+    bool isFullDay,
+  ) async {
+    try {
+      addTaskIsLoading = true;
+      print("Getting all commanders\n\n\n");
 
-  //     var response = await profileServiceInterface.addTask(
-  //       name,
-  //       date,
-  //       startTime,
-  //       endTime,
-  //       location,
-  //       isFullDay,
-  //     );
-  //     if (response.statusCode == 200) {
-  //       print('All Commanders are fetched successfully.');
-  //       print("HTTP Status: ${response.statusCode}");
-  //       print("Raw Response: ${response.body}");
+      var response = await taskServiceInterface.addTask(
+        name,
+        date,
+        startTime,
+        endTime,
+        location,
+        isFullDay,
+      );
+      if (response.statusCode == 200) {
+        print('All Commanders are fetched successfully.');
+        print("HTTP Status: ${response.statusCode}");
+        print("Raw Response: ${response.body}");
 
-  //       addTaskResponseModel = AddTaskResponseModel.fromJson(response.body);
-  //       print('Call from Controller after model calls.');
-  //     } else {
-  //       // Get.find<AuthController>().logOut();
-  //       // print(response.statusCode.toString());
-  //       // throw Exception('Failed to load Users All Imported Route List');
-  //     }
-  //   } catch (e) {
-  //     if (e is Exception) {
-  //       // print('⚠️ Exception in getAllCommanders: $e dddddddddddd');
-  //     } else {
-  //       print(e);
-  //     }
-  //   }
-  //   isLoading = false;
-  //   update();
-  // }
+        addTaskResponseModel = AddTaskResponseModel.fromJson(response.body);
+        print('Call from Controller after model calls.');
+      } else {
+        // Get.find<AuthController>().logOut();
+        // print(response.statusCode.toString());
+        // throw Exception('Failed to load Users All Imported Route List');
+      }
+    } catch (e) {
+      if (e is Exception) {
+        // print('⚠️ Exception in getAllCommanders: $e dddddddddddd');
+      } else {
+        print(e);
+      }
+    }
+    addTaskIsLoading = false;
+    update();
+  }
+
+  Future<void> editTask(
+    String name,
+    String date,
+    String startTime,
+    String endTime,
+    String location,
+    bool isFullDay,
+    String id,
+  ) async {
+    try {
+      addTaskIsLoading = true;
+      print("Getting all commanders\n\n\n");
+
+      var response = await taskServiceInterface.editTask(
+        name,
+        date,
+        startTime,
+        endTime,
+        location,
+        isFullDay,
+        id,
+      );
+      if (response.statusCode == 200) {
+        print('All Commanders are fetched successfully.');
+        print("HTTP Status: ${response.statusCode}");
+        print("Raw Response: ${response.body}");
+
+        editTaskResponseModel = EditTaskResponseModel.fromJson(response.body);
+        print('Call from Controller after model calls.');
+      } else {
+        // Get.find<AuthController>().logOut();
+        // print(response.statusCode.toString());
+        // throw Exception('Failed to load Users All Imported Route List');
+      }
+    } catch (e) {
+      if (e is Exception) {
+        // print('⚠️ Exception in getAllCommanders: $e dddddddddddd');
+      } else {
+        print(e);
+      }
+    }
+    addTaskIsLoading = false;
+    update();
+  }
 
   Future<void> getAllTasks() async {
     try {
