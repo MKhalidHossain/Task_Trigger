@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import '../../../../core/utils/constants/app_colors.dart';
 
 class OutlinedTextFieldforCreateWidget extends StatelessWidget {
@@ -10,15 +11,16 @@ class OutlinedTextFieldforCreateWidget extends StatelessWidget {
   final Icon icon;
   final double width;
 
-  const OutlinedTextFieldforCreateWidget({super.key, 
-  required this.controller, 
-   this.isLable = true, 
-   this.lebel,
-    required this.textInputType, 
-    required this.icon,  
-    this.width=double.infinity});
+  const OutlinedTextFieldforCreateWidget({
+    super.key,
+    required this.controller,
+    this.isLable = true,
+    this.lebel,
+    required this.textInputType,
+    required this.icon,
+    this.width = double.infinity,
+  });
 
- 
   //final String textFieldHeaderName;
 
   @override
@@ -57,7 +59,6 @@ class OutlinedTextFieldforCreateWidget extends StatelessWidget {
                 child: icon,
               ),
               border: OutlineInputBorder(),
-              
 
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(

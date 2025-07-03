@@ -192,9 +192,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   bottom: 16.0,
                                 ),
                                 child: TaskWidgetHome(
-                                  taskName: item.name!,
+                                  taskName: item.name ?? 'Name',
+                                  taskDate: item.date ?? 'Date',
                                   taskStartTime: item.startTime ?? 'Start Time',
                                   taskEndTime: item.endTime ?? 'End Time',
+                                  taskLocation: item.location ?? 'Location',
+                                  isFullDay: item.isFullDay ?? false,
+                                  taskId: item.sId!,
                                 ),
                               );
                             },

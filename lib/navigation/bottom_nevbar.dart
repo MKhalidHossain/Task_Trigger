@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iwalker/feature/home/presentation/screens/home_screen.dart';
 import 'package:iwalker/feature/profile/presentation/screens/user_profile_screen.dart';
 import 'package:iwalker/feature/task/presentation/screens/all_task_lists.dart';
-import 'package:iwalker/feature/task/presentation/screens/create_new_task.dart';
+import 'package:iwalker/feature/task/presentation/screens/create_new_task_or_edit_task.dart';
 
 import 'package:motion_tab_bar/MotionTabBar.dart';
 import 'package:motion_tab_bar/MotionTabBarController.dart';
@@ -90,7 +90,7 @@ class _BottomNevbarState extends State<BottomNevbar>
         children: <Widget>[
           HomeScreen(),
           AllTaskLists(),
-          CreateNewTask(),
+          CreateNewTaskOrEditTask(),
           AllTaskLists(),
           UserProfileScreen(),
         ],

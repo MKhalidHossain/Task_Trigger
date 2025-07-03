@@ -1,12 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 import 'package:iwalker/core/themes/text_extensions.dart';
 import 'package:iwalker/core/widgets/wide_custom_button.dart';
 import 'package:iwalker/feature/task/controllers/task_controller.dart';
 import '../widgets/outlined_text_field_widget.dart';
+import 'package:intl/intl.dart';
 
-class CreateNewTask extends StatefulWidget {
+class CreateNewTaskOrEditTask extends StatefulWidget {
   final bool isEditing;
   final String? taskId;
   final String? existingTaskName;
@@ -15,7 +17,7 @@ class CreateNewTask extends StatefulWidget {
   final String? existingEndTime;
   final String? existingLocation;
   final bool? existingIsFullDay;
-  CreateNewTask({
+  CreateNewTaskOrEditTask({
     super.key,
     this.isEditing = false,
     this.taskId,
@@ -28,10 +30,11 @@ class CreateNewTask extends StatefulWidget {
   });
 
   @override
-  State<CreateNewTask> createState() => _CreateNewTaskState();
+  State<CreateNewTaskOrEditTask> createState() =>
+      _CreateNewTaskOrEditTaskState();
 }
 
-class _CreateNewTaskState extends State<CreateNewTask> {
+class _CreateNewTaskOrEditTaskState extends State<CreateNewTaskOrEditTask> {
   final TextEditingController tNameController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
   final TextEditingController startTimeController = TextEditingController();
@@ -39,6 +42,9 @@ class _CreateNewTaskState extends State<CreateNewTask> {
   final TextEditingController setLocaionController = TextEditingController();
 
   bool isFullDay = false;
+  // Inside your state class
+  String _backendDate =
+      ''; // add this at the top of your _CreateNewTaskOrEditTaskState class
 
   @override
   void initState() {
@@ -46,7 +52,22 @@ class _CreateNewTaskState extends State<CreateNewTask> {
     if (widget.isEditing) {
       setState(() {
         tNameController.text = widget.existingTaskName ?? '';
-        dateController.text = widget.existingDate ?? '';
+        if (widget.existingDate != null && widget.existingDate!.isNotEmpty) {
+          try {
+            final parsedDate = DateTime.parse(widget.existingDate!);
+
+            // Format 1: "21 June 2025"
+            // final formattedDate = DateFormat('d MMMM y').format(parsedDate);
+
+            // Format 2: "21/06/2025"
+            final formattedDate = DateFormat('dd/MM/yyyy').format(parsedDate);
+
+            dateController.text = formattedDate;
+          } catch (e) {
+            dateController.text = widget.existingDate!;
+          }
+        }
+
         startTimeController.text = widget.existingStartTime ?? '';
         endTimeController.text = widget.existingEndTime ?? '';
         setLocaionController.text = widget.existingLocation ?? '';
@@ -95,38 +116,141 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                             //textFieldHeaderName: 'password',
                           ),
                           const SizedBox(height: 4),
-                          OutlinedTextFieldforCreateWidget(
-                            //name: 'Password',
-                            lebel: 'Select Date',
-                            controller: dateController,
-                            textInputType: TextInputType.text,
-                            icon: Icon(Icons.calendar_month_outlined),
-                            //textFieldHeaderName: 'password',
+
+                          GestureDetector(
+                            onTap: () async {
+                              DateTime? pickedDate = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(2020),
+                                lastDate: DateTime(2100),
+                              );
+                              if (pickedDate != null) {
+                                // Format date for display (UI)
+                                final formattedDate = DateFormat(
+                                  'dd/MM/yyyy',
+                                ).format(pickedDate);
+
+                                // Format date for backend
+                                final backendDate = DateFormat(
+                                  'yyyy-MM-dd',
+                                ).format(pickedDate);
+
+                                setState(() {
+                                  dateController.text = formattedDate;
+                                  _backendDate = backendDate;
+                                });
+                              }
+                            },
+                            child: AbsorbPointer(
+                              child: OutlinedTextFieldforCreateWidget(
+                                lebel: 'Select Date',
+                                controller: dateController,
+                                textInputType: TextInputType.text,
+                                icon: Icon(Icons.calendar_month_outlined),
+                              ),
+                            ),
                           ),
+
+                          // OutlinedTextFieldforCreateWidget(
+                          //   //name: 'Password',
+                          //   lebel: 'Select Date',
+                          //   controller: dateController,
+                          //   textInputType: TextInputType.text,
+                          //   icon: Icon(Icons.calendar_month_outlined),
+                          //   //textFieldHeaderName: 'password',
+                          // ),
                           const SizedBox(height: 4),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Expanded(
-                                child: OutlinedTextFieldforCreateWidget(
-                                  //name: 'Password',
-                                  lebel: 'Start Time',
-                                  controller: startTimeController,
-                                  textInputType: TextInputType.text,
-                                  icon: Icon(Icons.calendar_month_outlined),
-                                  //textFieldHeaderName: 'password',
+                                child: // Start Time
+                                    GestureDetector(
+                                  onTap: () async {
+                                    TimeOfDay? pickedTime =
+                                        await showTimePicker(
+                                          context: context,
+                                          initialTime: TimeOfDay(
+                                            hour: 00,
+                                            minute: 00,
+                                          ),
+                                        );
+                                    if (pickedTime != null) {
+                                      final now = DateTime.now();
+                                      final datetime = DateTime(
+                                        now.year,
+                                        now.month,
+                                        now.day,
+                                        pickedTime.hour,
+                                        pickedTime.minute,
+                                      );
+                                      final formattedTime = DateFormat(
+                                        'HH:mm',
+                                      ).format(datetime);
+                                      setState(() {
+                                        startTimeController.text =
+                                            formattedTime;
+                                      });
+                                    }
+                                  },
+                                  child: AbsorbPointer(
+                                    child: OutlinedTextFieldforCreateWidget(
+                                      lebel: 'Start Time',
+                                      controller: startTimeController,
+                                      textInputType: TextInputType.text,
+                                      icon: Icon(Icons.access_time),
+                                    ),
+                                  ),
                                 ),
+
+                                // OutlinedTextFieldforCreateWidget(
+                                //   //name: 'Password',
+                                //   lebel: 'Start Time',
+                                //   controller: startTimeController,
+                                //   textInputType: TextInputType.text,
+                                //   icon: Icon(Icons.calendar_month_outlined),
+                                //   //textFieldHeaderName: 'password',
+                                // ),
                               ),
                               const SizedBox(width: 16),
                               Expanded(
-                                child: OutlinedTextFieldforCreateWidget(
-                                  //name: 'Password',
-                                  lebel: 'End Time',
-                                  controller: endTimeController,
-                                  textInputType: TextInputType.text,
-                                  icon: Icon(Icons.calendar_month_outlined),
-                                  //textFieldHeaderName: 'password',
+                                child:
+                                // End Time
+                                GestureDetector(
+                                  onTap: () async {
+                                    TimeOfDay? pickedTime =
+                                        await showTimePicker(
+                                          context: context,
+                                          initialTime: TimeOfDay(
+                                            hour: 18,
+                                            minute: 0,
+                                          ),
+                                        );
+                                    if (pickedTime != null) {
+                                      setState(() {
+                                        endTimeController.text = pickedTime
+                                            .format(context);
+                                      });
+                                    }
+                                  },
+                                  child: AbsorbPointer(
+                                    child: OutlinedTextFieldforCreateWidget(
+                                      lebel: 'End Time',
+                                      controller: endTimeController,
+                                      textInputType: TextInputType.text,
+                                      icon: Icon(Icons.access_time),
+                                    ),
+                                  ),
                                 ),
+                                // OutlinedTextFieldforCreateWidget(
+                                //   //name: 'Password',
+                                //   lebel: 'End Time',
+                                //   controller: endTimeController,
+                                //   textInputType: TextInputType.text,
+                                //   icon: Icon(Icons.calendar_month_outlined),
+                                //   //textFieldHeaderName: 'password',
+                                // ),
                               ),
                             ],
                           ),
@@ -198,7 +322,7 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                                 if (widget.isEditing) {
                                   taskController.editTask(
                                     taskName,
-                                    date,
+                                    _backendDate,
                                     startTime,
                                     endTime,
                                     setLocaionController.text,
@@ -208,7 +332,7 @@ class _CreateNewTaskState extends State<CreateNewTask> {
                                 } else {
                                   taskController.addTask(
                                     taskName,
-                                    date,
+                                    _backendDate,
                                     startTime,
                                     endTime,
                                     setLocaionController.text,

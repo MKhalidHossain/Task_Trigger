@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iwalker/core/themes/text_extensions.dart';
-import 'package:iwalker/feature/task/presentation/screens/create_new_task.dart';
+import 'package:iwalker/feature/task/presentation/screens/create_new_task_or_edit_task.dart';
 import 'package:iwalker/feature/task/presentation/screens/task_details_screen.dart';
 
 import '../../../../core/widgets/default_circular_percent_widget.dart';
@@ -15,6 +15,7 @@ class TaskWidgetTaskList extends StatelessWidget {
   final String taskEndTime;
   final String taskLocation;
   final bool isFullDay;
+  final String taskId;
   // need to call Khalid vai to add this..............
   //
   //final String timeRemaining;
@@ -26,7 +27,6 @@ class TaskWidgetTaskList extends StatelessWidget {
   //final bool notificationEnabled;
   //final String createdAt;
   // final String updatedAt;
-  final String taskId;
 
   const TaskWidgetTaskList({
     super.key,
@@ -43,7 +43,17 @@ class TaskWidgetTaskList extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(TaskDetailsScreen());
+        Get.to(
+          TaskDetailsScreen(
+            taskName: taskName,
+            taskDate: taskDate,
+            taskStartTime: taskStartTime,
+            taskEndTime: taskEndTime,
+            taskLocation: taskLocation,
+            isFullDay: isFullDay,
+            taskId: taskId,
+          ),
+        );
       },
       child: Container(
         padding: const EdgeInsets.all(16),
@@ -99,7 +109,7 @@ class TaskWidgetTaskList extends StatelessWidget {
                   sufixIcon: Icons.edit_outlined,
                   onPressed: () {
                     Get.to(
-                      CreateNewTask(
+                      CreateNewTaskOrEditTask(
                         isEditing: true,
                         taskId: taskId, // if needed for update
                         existingTaskName: taskName,
