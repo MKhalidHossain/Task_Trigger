@@ -175,6 +175,19 @@ class _CreateNewTaskOrEditTaskState extends State<CreateNewTaskOrEditTask> {
                                             hour: 00,
                                             minute: 00,
                                           ),
+                                          builder: (
+                                            BuildContext context,
+                                            Widget? child,
+                                          ) {
+                                            return MediaQuery(
+                                              data: MediaQuery.of(
+                                                context,
+                                              ).copyWith(
+                                                alwaysUse24HourFormat: true,
+                                              ),
+                                              child: child!,
+                                            );
+                                          },
                                         );
                                     if (pickedTime != null) {
                                       final now = DateTime.now();
@@ -226,11 +239,34 @@ class _CreateNewTaskOrEditTaskState extends State<CreateNewTaskOrEditTask> {
                                             hour: 18,
                                             minute: 0,
                                           ),
+                                          builder: (
+                                            BuildContext context,
+                                            Widget? child,
+                                          ) {
+                                            return MediaQuery(
+                                              data: MediaQuery.of(
+                                                context,
+                                              ).copyWith(
+                                                alwaysUse24HourFormat: true,
+                                              ),
+                                              child: child!,
+                                            );
+                                          },
                                         );
                                     if (pickedTime != null) {
+                                      final now = DateTime.now();
+                                      final datetime = DateTime(
+                                        now.year,
+                                        now.month,
+                                        now.day,
+                                        pickedTime.hour,
+                                        pickedTime.minute,
+                                      );
+                                      final formattedTime = DateFormat(
+                                        'HH:mm',
+                                      ).format(datetime);
                                       setState(() {
-                                        endTimeController.text = pickedTime
-                                            .format(context);
+                                        endTimeController.text = formattedTime;
                                       });
                                     }
                                   },
@@ -243,6 +279,33 @@ class _CreateNewTaskOrEditTaskState extends State<CreateNewTaskOrEditTask> {
                                     ),
                                   ),
                                 ),
+
+                                // GestureDetector(
+                                //   onTap: () async {
+                                //     TimeOfDay? pickedTime =
+                                //         await showTimePicker(
+                                //           context: context,
+                                //           initialTime: TimeOfDay(
+                                //             hour: 18,
+                                //             minute: 0,
+                                //           ),
+                                //         );
+                                //     if (pickedTime != null) {
+                                //       setState(() {
+                                //         endTimeController.text = pickedTime
+                                //             .format(context);
+                                //       });
+                                //     }
+                                //   },
+                                //   child: AbsorbPointer(
+                                //     child: OutlinedTextFieldforCreateWidget(
+                                //       lebel: 'End Time',
+                                //       controller: endTimeController,
+                                //       textInputType: TextInputType.text,
+                                //       icon: Icon(Icons.access_time),
+                                //     ),
+                                //   ),
+                                // ),
                                 // OutlinedTextFieldforCreateWidget(
                                 //   //name: 'Password',
                                 //   lebel: 'End Time',
