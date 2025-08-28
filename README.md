@@ -59,7 +59,7 @@ Based on the project scope, **Task_Trigger** may include:
   - Notification & reminder interfaces  
 
 - **State Management:**  
-  - Provider / Bloc (for managing task updates and user interactions)  
+  - Provider / GetX (for managing task updates and user interactions)  
 
 - **Notifications:**  
   - Integrated with `flutter_local_notifications` for reminders  
